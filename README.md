@@ -1,17 +1,10 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+<p align='center'><img src=https://cloud.githubusercontent.com/assets/9874850/7516775/b00b8e36-f4d1-11e4-8da4-3df294d01f86.png></p>
 
-- [Cockatrice](#cockatrice)
-- [Get Involved [![Gitter chat](https://badges.gitter.im/Cockatrice/Cockatrice.png)](https://gitter.im/Cockatrice/Cockatrice)](#get-involved-)
-- [Community Resources](#community-resources)
-- [Translation Status [![Cockatrice on Transiflex](https://ds0k0en9abmn1.cloudfront.net/static/charts/images/tx-logo-micro.646b0065fce6.png)](https://www.transifex.com/projects/p/cockatrice/)](#translation-status-)
-- [Building [![Build Status](https://travis-ci.org/Cockatrice/Cockatrice.svg?branch=master)](https://travis-ci.org/Cockatrice/Cockatrice)](#building-)
-- [Building servatrice Docker container](#building-servatrice-docker-container)
-- [Running](#running)
-- [License](#license)
+---
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+[Cockatrice](#cockatrice) | [Get Involved] (#get-involved-) | [Community Resources](#community-resources) | [Translation Status](#translation-status-) | [Building](#building-) | [Running](#running) | [License](#license)
+
+---
 
 # Cockatrice
 
@@ -75,7 +68,7 @@ The following flags can be passed to `cmake`:
 - `-DCMAKE_BUILD_TYPE=Debug` Compile in debug mode. Enables extra logging output, debug symbols, and much more verbose compiler warnings.
 - `-DUPDATE_TRANSLATIONS=1` Configure `make` to update the translation .ts files for new strings in the source code. Note: Running `make clean` will remove the .ts files.
 
-# Building servatrice Docker container
+### Building servatrice Docker container
 `docker build -t servatrice .`
 
 # Running
