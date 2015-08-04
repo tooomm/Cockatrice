@@ -2,7 +2,7 @@
 
 ---
 
-[Cockatrice](#cockatrice) | [Get Involved] (#get-involved-) | [Community Resources](#community-resources) | [Translation Status](#translation-status-) | [Building](#building-) | [Running](#running) | [License](#license)
+[Cockatrice](#cockatrice) | [Get Involved] (#get-involved-) | [Community](#community-resources) | [Translation](#translation-status-) | [Building](#building-) | [Running](#running) | [License](#license)
 
 ---
 
