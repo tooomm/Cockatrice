@@ -1,10 +1,10 @@
 
 ---
 
-#####Table of contents &nbsp; [Cockatrice](#table-of-contents--cockatrice--get-involved--community--translation--building--running--license) | [Get Involved] (#get-involved-) | [Community](#community-resources) | [Translation](#translation-status-) | [Building](#building-) | [Running](#running) | [License](#license)
+#####Table of contents <br> [Cockatrice](#table-of-contents--cockatrice--get-involved--community--translation--building--running--license) | [Get Involved] (#get-involved-) | [Community](#community-resources) | [Translation](#translation-status-) | [Building](#building-) | [Running](#running) | [License](#license)
 
 ---
-
+<br>
 <p align='center'><img src=https://cloud.githubusercontent.com/assets/9874850/7516775/b00b8e36-f4d1-11e4-8da4-3df294d01f86.png></p>
 
 # Cockatrice
