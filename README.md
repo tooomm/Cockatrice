@@ -1,7 +1,7 @@
 
 ---
 
-**Table of content** | [Cockatrice](#cockatrice) | [Get Involved] (#get-involved-) | [Community](#community-resources) | [Translation](#translation-status-) | [Building](#building-) | [Running](#running) | [License](#license)
+**Table of content** &nbsp;||&nbsp;&nbsp; [Cockatrice](#cockatrice) | [Get Involved] (#get-involved-) | [Community](#community-resources) | [Translation](#translation-status-) | [Building](#building-) | [Running](#running) | [License](#license)
 
 ---
 <br>
