@@ -1,18 +1,30 @@
+<p align='center'><img src=https://cloud.githubusercontent.com/assets/9874850/7516775/b00b8e36-f4d1-11e4-8da4-3df294d01f86.png></p>
+
+---
+
+**Table of Contents** &nbsp;&nbsp; [Cockatrice](#cockatrice) | [Get Involved] (#get-involved-) | [Community](#community-resources) | [Translation](#translation-status-) | [Building](#building-) | [Running](#running) | [License](#license)
+
+---
+
 # Cockatrice
 
 Cockatrice is an open-source multiplatform software for playing card games,
 such as Magic: The Gathering, over a network. It is fully client-server based
 to prevent any kind of cheating, though it supports single-player games without
-a network interface as well. Both client and server are written in Qt, supporting both Qt4 and Qt5.
+a network interface as well. Both client and server are written in Qt5.<br> [▲](https://github.com/tooomm/Cockatrice/tree/tooomm-patch-1-1#readme)
+
 
 # Get Involved [![Gitter chat](https://badges.gitter.im/Cockatrice/Cockatrice.png)](https://gitter.im/Cockatrice/Cockatrice)
 
-Chat with the Cockatrice developers on Gitter. Come here to talk about the application, features, or just to hang out. For support regarding specific servers, please contact that server's admin or forum for support rather than asking here.
+Chat with the Cockatrice developers on Gitter. Come here to talk about the application, features, or just to hang out. For support regarding specific servers, please contact that server's admin or forum for support rather than asking here.<br>
+[▲](https://github.com/tooomm/Cockatrice/tree/tooomm-patch-1-1#readme)
 
 # Community Resources
-- [reddit r/Cockatrice](http://reddit.com/r/cockatrice)
-- [Woogerworks Server & Forums](http://www.woogerworks.com)
 - [Cockatrice Official Wiki](https://github.com/Cockatrice/Cockatrice/wiki)
+- [reddit r/Cockatrice](http://reddit.com/r/cockatrice)
+- incomplete Serverlist: [Woogerworks](http://www.woogerworks.com) / [Chickatrice] (http://www.chickatrice.net/) / [Poixen](http://www.poixen.com/)<br>
+
+[▲](https://github.com/tooomm/Cockatrice/tree/tooomm-patch-1-1#readme)
 
 # Translation Status [![Cockatrice on Transiflex](https://ds0k0en9abmn1.cloudfront.net/static/charts/images/tx-logo-micro.646b0065fce6.png)](https://www.transifex.com/projects/p/cockatrice/)
 
@@ -23,11 +35,12 @@ Language statistics for `Cockatrice` *(on the left)* and `Oracle` *(on the right
 
 [![Cockatrice translations](https://www.transifex.com/projects/p/cockatrice/resource/cockatrice/chart/image_png)](https://www.transifex.com/projects/p/cockatrice/resource/cockatrice/)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Oracle translations](https://www.transifex.com/projects/p/cockatrice/resource/oracle/chart/image_png)](https://www.transifex.com/projects/p/cockatrice/resource/oracle/)
 
-Check out our [Translator FAQ](https://github.com/Cockatrice/Cockatrice/wiki/Translation-FAQ) for more information!
+Check out our [Translator FAQ](https://github.com/Cockatrice/Cockatrice/wiki/Translation-FAQ) for more information!<br>
+[▲](https://github.com/tooomm/Cockatrice/tree/tooomm-patch-1-1#readme)
 
 # Building [![Build Status](https://travis-ci.org/Cockatrice/Cockatrice.svg?branch=master)](https://travis-ci.org/Cockatrice/Cockatrice)
 
-**Detailed installation instructions are on the Cockatrice wiki under [Installing Cockatrice](https://github.com/Cockatrice/Cockatrice/wiki/Installing-Cockatrice)**
+**Detailed compiling instructions are on the Cockatrice wiki under [Compiling Cockatrice](https://github.com/Cockatrice/Cockatrice/wiki/Compiling-Cockatrice)**
 
 Dependencies:
 
@@ -38,10 +51,6 @@ Dependencies:
 Oracle can optionally use zlib to load zipped files:
 
 - [zlib](http://www.zlib.net/)
-
-The server requires an additional dependency when compiled under Qt4:
-
-- [libgcrypt](http://www.gnu.org/software/libgcrypt/)
 
 To compile:
 
@@ -56,16 +65,21 @@ The following flags can be passed to `cmake`:
 - `-DWITH_SERVER=1` Build the server
 - `-DWITH_CLIENT=0` Do not build the client
 - `-DWITH_ORACLE=0` Do not build Oracle
-- `-DWITH_QT4=1` Force compilation to use Qt4 instead of Qt5.
 - `-DCMAKE_BUILD_TYPE=Debug` Compile in debug mode. Enables extra logging output, debug symbols, and much more verbose compiler warnings.
 - `-DUPDATE_TRANSLATIONS=1` Configure `make` to update the translation .ts files for new strings in the source code. Note: Running `make clean` will remove the .ts files.
+
+#### Building servatrice Docker container
+`docker build -t servatrice .`<br>
+[▲](https://github.com/tooomm/Cockatrice/tree/tooomm-patch-1-1#readme)
 
 # Running
 
 `oracle` fetches card data  
 `cockatrice` is the game client  
-`servatrice` is the server
+`servatrice` is the server<br>
+[▲](https://github.com/tooomm/Cockatrice/tree/tooomm-patch-1-1#readme)
 
 # License
 
-Cockatrice is free software, licensed under the GPLv2; see COPYING for details.
+Cockatrice is free software, licensed under the GPLv2; see COPYING for details.<br>
+[▲](https://github.com/tooomm/Cockatrice/tree/tooomm-patch-1-1#readme)
