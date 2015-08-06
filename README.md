@@ -20,9 +20,9 @@ Chat with the Cockatrice developers on Gitter. Come here to talk about the appli
 [▲](https://github.com/tooomm/Cockatrice/tree/tooomm-patch-1-1#readme)
 
 # Community Resources
+- [Cockatrice Official Wiki](https://github.com/Cockatrice/Cockatrice/wiki)
 - [reddit r/Cockatrice](http://reddit.com/r/cockatrice)
-- [Woogerworks Server & Forums](http://www.woogerworks.com)
-- [Cockatrice Official Wiki](https://github.com/Cockatrice/Cockatrice/wiki)<br>
+- incomplete Serverlist: [Woogerworks](http://www.woogerworks.com) / [Chickatrice] (http://www.chickatrice.net/) / [Poixen](http://www.poixen.com/)<br>
 
 [▲](https://github.com/tooomm/Cockatrice/tree/tooomm-patch-1-1#readme)
 
