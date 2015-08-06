@@ -11,7 +11,7 @@
 Cockatrice is an open-source multiplatform software for playing card games,
 such as Magic: The Gathering, over a network. It is fully client-server based
 to prevent any kind of cheating, though it supports single-player games without
-a network interface as well. Both client and server are written in Qt5.<br> [Δ](https://github.com/tooomm/Cockatrice/tree/tooomm-patch-1-1#readme)
+a network interface as well. Both client and server are written in Qt5.<br> [▲](https://github.com/tooomm/Cockatrice/tree/tooomm-patch-1-1#readme)
 
 
 # Get Involved [![Gitter chat](https://badges.gitter.im/Cockatrice/Cockatrice.png)](https://gitter.im/Cockatrice/Cockatrice)
@@ -22,7 +22,7 @@ Chat with the Cockatrice developers on Gitter. Come here to talk about the appli
 # Community Resources
 - [Cockatrice Official Wiki](https://github.com/Cockatrice/Cockatrice/wiki)
 - [reddit r/Cockatrice](http://reddit.com/r/cockatrice)
-- incomplete Serverlist: [Woogerworks](http://www.woogerworks.com) / [Chickatrice] (http://www.chickatrice.net/) / [Poixen](http://www.poixen.com/)<br>
+- [Woogerworks](http://www.woogerworks.com) / [Chickatrice] (http://www.chickatrice.net/) / [Poixen](http://www.poixen.com/) (incomplete Serverlist)<br>
 
 [▲](https://github.com/tooomm/Cockatrice/tree/tooomm-patch-1-1#readme)
 
