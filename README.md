@@ -1,4 +1,3 @@
-[[ Backlinks auf cockatrice readme ändern!! // commit beschriebung // git update + new branch]]<br><br>
 
 <p align='center'><img src=https://cloud.githubusercontent.com/assets/9874850/7516775/b00b8e36-f4d1-11e4-8da4-3df294d01f86.png></p>
 
@@ -13,20 +12,20 @@
 Cockatrice is an open-source multiplatform software for playing card games,
 such as Magic: The Gathering, over a network. It is fully client-server based
 to prevent any kind of cheating, though it supports single-player games without
-a network interface as well. Both client and server are written in Qt5.<br> [▲](https://github.com/tooomm/Cockatrice/tree/tooomm-patch-1-1#readme)
+a network interface as well. Both client and server are written in Qt5.<br><p align='center'>[▲](https://github.com/tooomm/Cockatrice/tree/tooomm-patch-1-1#readme)</p>
 
 
 # Get Involved [![Gitter chat](https://badges.gitter.im/Cockatrice/Cockatrice.png)](https://gitter.im/Cockatrice/Cockatrice)
 
-Chat with the Cockatrice developers on Gitter. Come here to talk about the application, features, or just to hang out. For support regarding specific servers, please contact that server's admin or forum for support rather than asking here.<br>
-[▲](https://github.com/tooomm/Cockatrice/tree/tooomm-patch-1-1#readme)
+Chat with the Cockatrice developers on Gitter. Come here to talk about the application, features, or just to hang out. For support regarding specific servers, please contact that server's admin or forum for support rather than asking here.<br><p
+align='center'>[▲](https://github.com/tooomm/Cockatrice/tree/tooomm-patch-1-1#readme)</p>
 
 # Community Resources
 - [Cockatrice Official Wiki](https://github.com/Cockatrice/Cockatrice/wiki)
 - [reddit r/Cockatrice](http://reddit.com/r/cockatrice)
-- incomplete Serverlist: [Woogerworks](http://www.woogerworks.com) / [Chickatrice] (http://www.chickatrice.net/) / [Poixen](http://www.poixen.com/)<br>
-
-[▲](https://github.com/tooomm/Cockatrice/tree/tooomm-patch-1-1#readme)
+- incomplete Serverlist: [Woogerworks](http://www.woogerworks.com) / [Chickatrice] (http://www.chickatrice.net/) / [Poixen](http://www.poixen.com/)
+<br><p
+align='center'>[▲](https://github.com/tooomm/Cockatrice/tree/tooomm-patch-1-1#readme)</p>
 
 # Translation Status [![Cockatrice on Transiflex](https://ds0k0en9abmn1.cloudfront.net/static/charts/images/tx-logo-micro.646b0065fce6.png)](https://www.transifex.com/projects/p/cockatrice/)
 
@@ -71,17 +70,14 @@ The following flags can be passed to `cmake`:
 - `-DUPDATE_TRANSLATIONS=1` Configure `make` to update the translation .ts files for new strings in the source code. Note: Running `make clean` will remove the .ts files.
 
 #### Building servatrice Docker container
-`docker build -t servatrice .`<br>
-[▲](https://github.com/tooomm/Cockatrice/tree/tooomm-patch-1-1#readme)
+`docker build -t servatrice .`<br><p align='right'>[▲](https://github.com/tooomm/Cockatrice/tree/tooomm-patch-1-1#readme)</p>
 
 # Running
 
 `oracle` fetches card data  
 `cockatrice` is the game client  
-`servatrice` is the server<br>
-[▲](https://github.com/tooomm/Cockatrice/tree/tooomm-patch-1-1#readme)
+`servatrice` is the server<br><p align='right'>[▲](https://github.com/tooomm/Cockatrice/tree/tooomm-patch-1-1#readme)</p>
 
 # License
 
-Cockatrice is free software, licensed under the GPLv2; see COPYING for details.<br>
-[▲](https://github.com/tooomm/Cockatrice/tree/tooomm-patch-1-1#readme)
+Cockatrice is free software, licensed under the GPLv2; see COPYING for details.<br><p align='right'>[▲](https://github.com/tooomm/Cockatrice/tree/tooomm-patch-1-1#readme)</p>
