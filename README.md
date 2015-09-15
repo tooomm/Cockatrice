@@ -1,36 +1,35 @@
-[cockatrice icon]: https://cloud.githubusercontent.com/assets/9874850/7516775/b00b8e36-f4d1-11e4-8da4-3df294d01f86.png
 
 [gitter badge]: https://badges.gitter.im/Cockatrice/Cockatrice.png
 [gitter chat]: https://gitter.im/Cockatrice/Cockatrice/
 
 [transifex badge]: https://ds0k0en9abmn1.cloudfront.net/static/charts/images/tx-logo-micro.646b0065fce6.png
-[transifex project page]: https://www.transifex.com/projects/p/cockatrice/
+[transifex project url]: https://www.transifex.com/projects/p/cockatrice/
 
 [transifex cockatrice chart]: https://www.transifex.com/projects/p/cockatrice/resource/cockatrice/chart/image_png/
 [transifex cockatrice resource]: https://www.transifex.com/projects/p/cockatrice/resource/cockatrice/
 [transifex oracle chart]: https://www.transifex.com/projects/p/cockatrice/resource/oracle/chart/image_png/
 [transifex oracle resource]: https://www.transifex.com/projects/p/cockatrice/resource/oracle/
 
-[travis badge]: https://travis-ci.org/Cockatrice/Cockatrice.svg?branch=master/
+[travis badge master]: https://travis-ci.org/Cockatrice/Cockatrice.svg?branch=master/
 [travis project page]: https://travis-ci.org/Cockatrice/Cockatrice/
 
 [wiki]: https://github.com/Cockatrice/Cockatrice/wiki/
 [wiki translator faq]: https://github.com/Cockatrice/Cockatrice/wiki/Translation-FAQ/
 [wiki compiling]: https://github.com/Cockatrice/Cockatrice/wiki/Compiling-Cockatrice/
 
-[qt]: http://qt-project.org
-[protobuf]: http://code.google.com/p/protobuf/
-[cmake]: http://www.cmake.org
-[zlib]: http://www.zlib.net
-[libgcrypt]: http://www.gnu.org/software/libgcrypt/
+[qt]: https://qt-project.org
+[protobuf]: https://code.google.com/p/protobuf/
+[cmake]: https://www.cmake.org
+[zlib]: https://www.zlib.net
+[libgcrypt]: https://www.gnu.org/software/libgcrypt/
 
-[reddit]: http://reddit.com/r/cockatrice/
+[reddit]: https://reddit.com/r/cockatrice/
 
-[woogerworks]: http://www.woogerworks.com
-[chickatrice]: http://www.chickatrice.net
-[poixen]: http://www.poixen.com
+[woogerworks]: https://www.woogerworks.com
+[chickatrice]: https://www.chickatrice.net
+[poixen]: https://www.poixen.com
 
-<p align='center'><img src=[cockatrice icon]></p>
+<p align='center'><img src=https://cloud.githubusercontent.com/assets/9874850/7516775/b00b8e36-f4d1-11e4-8da4-3df294d01f86.png></p>
 
 ---
 
@@ -57,32 +56,33 @@ Chat with the Cockatrice developers on Gitter. Come here to talk about the appli
 - [Woogerworks][woogerworks] / [Chickatrice][chickatrice] / [Poixen][poixen] (incomplete Serverlist)<br>
 
 
-# Translation Status [![Cockatrice on Transiflex](https://ds0k0en9abmn1.cloudfront.net/static/charts/images/tx-logo-micro.646b0065fce6.png)](https://www.transifex.com/projects/p/cockatrice/)
+# Translation Status [![Cockatrice on Transiflex][transifex badge]][transifex project page]
 
 Cockatrice uses Transifex for translations. You can help us bring Cockatrice/Oracle to your language or edit single wordings by clicking on the associated charts below.<br>
-Our [project page](https://www.transifex.com/projects/p/cockatrice/) offers a detailed overview for contributors.
+Our [project page][transifex project page] offers a detailed overview for contributors.
 
 Language statistics for `Cockatrice` *(on the left)* and `Oracle` *(on the right)*:
 
-[![Cockatrice translations](https://www.transifex.com/projects/p/cockatrice/resource/cockatrice/chart/image_png)](https://www.transifex.com/projects/p/cockatrice/resource/cockatrice/)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Oracle translations](https://www.transifex.com/projects/p/cockatrice/resource/oracle/chart/image_png)](https://www.transifex.com/projects/p/cockatrice/resource/oracle/)
+[![Cockatrice translations][transifex cockatrice chart]][transifex cockatrice resource] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[![Oracle translations][transifex oracle chart][transifex oracle resource]
 
-Check out our [Translator FAQ](https://github.com/Cockatrice/Cockatrice/wiki/Translation-FAQ) for more information!<br>
+Check out our [Translator FAQ][wiki translator faq] for more information!<br>
 
 
-# Building [![Build Status](https://travis-ci.org/Cockatrice/Cockatrice.svg?branch=master)](https://travis-ci.org/Cockatrice/Cockatrice)
+# Building [![Build Status][travis badge master]][travis project page]
 
-**Detailed compiling instructions are on the Cockatrice wiki under [Compiling Cockatrice](https://github.com/Cockatrice/Cockatrice/wiki/Compiling-Cockatrice)**
+**Detailed compiling instructions are on the Cockatrice wiki under [Compiling Cockatrice][wiki compiling]**
 
 Dependencies:
-- [Qt](http://qt-project.org/) 
-- [protobuf](http://code.google.com/p/protobuf/)
-- [CMake](http://www.cmake.org/)
+- [Qt][qt]
+- [protobuf][protobuf]
+- [CMake][cmake]
 
 Oracle can optionally use zlib to load zipped files:
-- [zlib](http://www.zlib.net/)
+- [zlib][zlib]
 
 The server requires an additional dependency when compiled under Qt4:
-- [libgcrypt](http://www.gnu.org/software/libgcrypt/)
+- [libgcrypt][libgcrypt]
 
 
 To compile:
