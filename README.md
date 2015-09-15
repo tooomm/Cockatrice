@@ -1,3 +1,33 @@
+[gitter badge]: https://badges.gitter.im/Cockatrice/Cockatrice.png
+[gitter chat]: https://gitter.im/Cockatrice/Cockatrice/
+
+[transifex badge]: https://ds0k0en9abmn1.cloudfront.net/static/charts/images/tx-logo-micro.646b0065fce6.png
+[transifex project page]: https://www.transifex.com/projects/p/cockatrice/
+
+[transifex cockatrice chart]: https://www.transifex.com/projects/p/cockatrice/resource/cockatrice/chart/image_png/
+[transifex cockatrice resource]: https://www.transifex.com/projects/p/cockatrice/resource/cockatrice/
+[transifex oracle chart]: https://www.transifex.com/projects/p/cockatrice/resource/oracle/chart/image_png/
+[transifex oracle resource]: https://www.transifex.com/projects/p/cockatrice/resource/oracle/
+
+[travis badge]: https://travis-ci.org/Cockatrice/Cockatrice.svg?branch=master/
+[travis project page]: https://travis-ci.org/Cockatrice/Cockatrice/
+
+[wiki]: https://github.com/Cockatrice/Cockatrice/wiki/
+[wiki translator faq]: https://github.com/Cockatrice/Cockatrice/wiki/Translation-FAQ/
+[wiki compiling]: https://github.com/Cockatrice/Cockatrice/wiki/Compiling-Cockatrice/
+
+[qt]: http://qt-project.org
+[protobuf]: http://code.google.com/p/protobuf/
+[cmake]: http://www.cmake.org
+[zlib]: http://www.zlib.net
+[libgcrypt]: http://www.gnu.org/software/libgcrypt/
+
+[reddit]: http://reddit.com/r/cockatrice/
+
+[woogerworks]: http://www.woogerworks.com
+[chickatrice]: http://www.chickatrice.net
+[poixen]: http://www.poixen.com
+
 <p align='center'><img src=https://cloud.githubusercontent.com/assets/9874850/7516775/b00b8e36-f4d1-11e4-8da4-3df294d01f86.png></p>
 
 ---
@@ -14,15 +44,15 @@ to prevent any kind of cheating, though it supports single-player games without
 a network interface as well. Both client and server are written in Qt, supporting both Qt4 and Qt5.<br>
 
 
-# Get Involved [![Gitter chat](https://badges.gitter.im/Cockatrice/Cockatrice.png)](https://gitter.im/Cockatrice/Cockatrice)
+# Get Involved [![Gitter chat][gitter badge]][gitter chat]
 
 Chat with the Cockatrice developers on Gitter. Come here to talk about the application, features, or just to hang out. For support regarding specific servers, please contact that server's admin or forum for support rather than asking here.<br>
 
 
 # Community Resources
-- [Cockatrice Official Wiki](https://github.com/Cockatrice/Cockatrice/wiki)
-- [reddit r/Cockatrice](http://reddit.com/r/cockatrice)
-- [Woogerworks](http://www.woogerworks.com) / [Chickatrice] (http://www.chickatrice.net/) / [Poixen](http://www.poixen.com/) (incomplete Serverlist)<br>
+- [Cockatrice Official Wiki][wiki]
+- [reddit r/Cockatrice][reddit]
+- [Woogerworks][woogerworks] / [Chickatrice][chickatrice] / [Poixen][poixen] (incomplete Serverlist)<br>
 
 
 # Translation Status [![Cockatrice on Transiflex](https://ds0k0en9abmn1.cloudfront.net/static/charts/images/tx-logo-micro.646b0065fce6.png)](https://www.transifex.com/projects/p/cockatrice/)
