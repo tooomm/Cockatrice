@@ -25,9 +25,9 @@
 
 [reddit]: https://reddit.com/r/cockatrice/
 
-[woogerworks]: https://www.woogerworks.com
-[chickatrice]: https://www.chickatrice.net
-[poixen]: https://www.poixen.com
+[woogerworks]: http://www.woogerworks.com
+[chickatrice]: http://www.chickatrice.net
+[poixen]: http://www.poixen.com
 
 <p align='center'><img src=https://cloud.githubusercontent.com/assets/9874850/7516775/b00b8e36-f4d1-11e4-8da4-3df294d01f86.png></p>
 
@@ -56,7 +56,7 @@ Chat with the Cockatrice developers on Gitter. Come here to talk about the appli
 - [Woogerworks][woogerworks] / [Chickatrice][chickatrice] / [Poixen][poixen] (incomplete Serverlist)<br>
 
 
-# Translation Status [![Cockatrice on Transiflex][transifex badge]][transifex project page]
+# Translation Status [![Cockatrice on Transiflex][transifex badge]][transifex project url]
 
 Cockatrice uses Transifex for translations. You can help us bring Cockatrice/Oracle to your language or edit single wordings by clicking on the associated charts below.<br>
 Our [project page][transifex project page] offers a detailed overview for contributors.
