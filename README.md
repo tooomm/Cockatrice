@@ -10,7 +10,7 @@
 [transifex oracle chart]: https://www.transifex.com/projects/p/cockatrice/resource/oracle/chart/image_png/
 [transifex oracle resource]: https://www.transifex.com/projects/p/cockatrice/resource/oracle/
 
-[travis badge master]: https://travis-ci.org/Cockatrice/Cockatrice.svg?branch=master/
+[travis badge master]: https://travis-ci.org/Cockatrice/Cockatrice.svg?branch=master
 [travis project page]: https://travis-ci.org/Cockatrice/Cockatrice/
 
 [wiki]: https://github.com/Cockatrice/Cockatrice/wiki/
@@ -20,7 +20,7 @@
 [qt]: http://qt-project.org
 [protobuf]: https://code.google.com/p/protobuf/
 [cmake]: http://www.cmake.org
-[zlib]: https://www.zlib.net
+[zlib]: http://www.zlib.net
 [libgcrypt]: https://www.gnu.org/software/libgcrypt/
 
 [reddit]: https://reddit.com/r/cockatrice/
