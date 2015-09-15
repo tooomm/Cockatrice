@@ -1,3 +1,5 @@
+[cockatrice icon]: https://cloud.githubusercontent.com/assets/9874850/7516775/b00b8e36-f4d1-11e4-8da4-3df294d01f86.png
+
 [gitter badge]: https://badges.gitter.im/Cockatrice/Cockatrice.png
 [gitter chat]: https://gitter.im/Cockatrice/Cockatrice/
 
@@ -28,7 +30,7 @@
 [chickatrice]: http://www.chickatrice.net
 [poixen]: http://www.poixen.com
 
-<p align='center'><img src=https://cloud.githubusercontent.com/assets/9874850/7516775/b00b8e36-f4d1-11e4-8da4-3df294d01f86.png></p>
+<p align='center'><img src=[cockatrice icon]></p>
 
 ---
 
@@ -52,7 +54,7 @@ Chat with the Cockatrice developers on Gitter. Come here to talk about the appli
 # Community Resources
 - [Cockatrice Official Wiki][wiki]
 - [reddit r/Cockatrice][reddit]
-- incomplete Serverlist: [Woogerworks][woogerworks] / [Chickatrice][chickatrice] / [Poixen][poixen]<br>
+- [Woogerworks][woogerworks] / [Chickatrice][chickatrice] / [Poixen][poixen] (incomplete Serverlist)<br>
 
 
 # Translation Status [![Cockatrice on Transiflex](https://ds0k0en9abmn1.cloudfront.net/static/charts/images/tx-logo-micro.646b0065fce6.png)](https://www.transifex.com/projects/p/cockatrice/)
