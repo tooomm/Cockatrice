@@ -17,9 +17,9 @@
 [wiki translator faq]: https://github.com/Cockatrice/Cockatrice/wiki/Translation-FAQ/
 [wiki compiling]: https://github.com/Cockatrice/Cockatrice/wiki/Compiling-Cockatrice/
 
-[qt]: https://qt-project.org
+[qt]: http://qt-project.org
 [protobuf]: https://code.google.com/p/protobuf/
-[cmake]: https://www.cmake.org
+[cmake]: http://www.cmake.org
 [zlib]: https://www.zlib.net
 [libgcrypt]: https://www.gnu.org/software/libgcrypt/
 
