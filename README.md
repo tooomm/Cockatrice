@@ -52,7 +52,7 @@ Chat with the Cockatrice developers on Gitter. Come here to talk about the appli
 # Community Resources
 - [Cockatrice Official Wiki][wiki]
 - [reddit r/Cockatrice][reddit]
-- [Woogerworks][woogerworks] / [Chickatrice][chickatrice] / [Poixen][poixen] (incomplete Serverlist)<br>
+- incomplete Serverlist: [Woogerworks][woogerworks] / [Chickatrice][chickatrice] / [Poixen][poixen]<br>
 
 
 # Translation Status [![Cockatrice on Transiflex](https://ds0k0en9abmn1.cloudfront.net/static/charts/images/tx-logo-micro.646b0065fce6.png)](https://www.transifex.com/projects/p/cockatrice/)
