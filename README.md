@@ -30,6 +30,7 @@
 [poixen]: http://www.poixen.com
 
 [licence]: https://github.com/Cockatrice/Cockatrice/blob/master/COPYING
+[licence logo]: https://forrst-live.s3.amazonaws.com/posts/snaps/90004/large.png?1308576863
 
 
 
@@ -37,7 +38,7 @@
 
 ---
 
-**Table of Contents** &nbsp;&nbsp; [Cockatrice](#cockatrice) | [Get Involved] (#get-involved-) | [Community](#community-resources) | [Translation](#translation-status-) | [Building](#building-) | [Running](#running) | [License](#license)
+**Table of Contents** &nbsp;&nbsp; [Cockatrice](#cockatrice) | [Get Involved] (#get-involved-) | [Community](#community-resources) | [Translation](#translation-status-) | [Building](#building-) | [Running](#running) | [License](#license-)
 
 ---
 
@@ -117,7 +118,7 @@ The following flags can be passed to `cmake`:
 `servatrice` is the server<br>
 
 
-# License
+# License [![GPLv2 Licence][licence logo]][licence]
 
 Cockatrice is free software, licensed under the [GPLv2][licence].<br>
 
