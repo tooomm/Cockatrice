@@ -29,6 +29,10 @@
 [chickatrice]: http://www.chickatrice.net
 [poixen]: http://www.poixen.com
 
+[licence]: https://github.com/Cockatrice/Cockatrice/blob/master/COPYING
+
+
+
 <p align='center'><img src=https://cloud.githubusercontent.com/assets/9874850/7516775/b00b8e36-f4d1-11e4-8da4-3df294d01f86.png></p>
 
 ---
@@ -63,8 +67,7 @@ Our [project page][transifex project page] offers a detailed overview for contri
 
 Language statistics for `Cockatrice` *(on the left)* and `Oracle` *(on the right)*:
 
-[![Cockatrice translations][transifex cockatrice chart]][transifex cockatrice resource] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-[![Oracle translations][transifex oracle chart]][transifex oracle resource]
+[![Cockatrice translations][transifex cockatrice chart]][transifex cockatrice resource] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Oracle translations][transifex oracle chart]][transifex oracle resource]
 
 Check out our [Translator FAQ][wiki translator faq] for more information!<br>
 
@@ -116,5 +119,5 @@ The following flags can be passed to `cmake`:
 
 # License
 
-Cockatrice is free software, licensed under the GPLv2; see COPYING for details.<br>
+Cockatrice is free software, licensed under the [GPLv2][licence].<br>
 
