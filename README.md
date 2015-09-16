@@ -67,7 +67,7 @@ Our [project page][transifex project page] offers a detailed overview for contri
 
 Language statistics for `Cockatrice` *(on the left)* and `Oracle` *(on the right)*:
 
-[![Cockatrice translations][transifex cockatrice chart]][transifex cockatrice resource] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Oracle translations][transifex oracle chart]][transifex oracle resource]
+[![Cockatrice translations][transifex cockatrice chart]][transifex cockatrice resource] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Oracle translations][transifex oracle chart]][transifex oracle resource]
 
 Check out our [Translator FAQ][wiki translator faq] for more information!<br>
 
