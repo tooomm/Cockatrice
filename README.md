@@ -30,7 +30,7 @@
 [poixen]: http://www.poixen.com
 
 [licence]: https://github.com/Cockatrice/Cockatrice/blob/master/COPYING
-[licence logo]: https://forrst-live.s3.amazonaws.com/posts/snaps/90004/large.png?1308576863
+[licence logo]: https://forrst-live.s3.amazonaws.com/posts/snaps/90004/large.png
 
 
 
