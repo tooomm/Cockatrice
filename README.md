@@ -34,7 +34,7 @@ Chat with the Cockatrice developers on Gitter. Come here to talk about the appli
 # Translation Status [![Cockatrice on Transiflex](https://ds0k0en9abmn1.cloudfront.net/static/charts/images/tx-logo-micro.646b0065fce6.png)](https://www.transifex.com/projects/p/cockatrice/)
 
 Cockatrice uses Transifex for translations. You can help us bring Cockatrice/Oracle to your language or edit single wordings by clicking on the associated charts below.<br>
-Our [project page](https://www.transifex.com/projects/p/cockatrice/) there offers a detailed overview of language statistics.
+Our [Transifex project page](https://www.transifex.com/projects/p/cockatrice/) offers a detailed overview of language statistics.
 
 <!-- spaces (&nbsp;) needed for layout adjustments -->
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
