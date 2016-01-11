@@ -23,7 +23,7 @@ Downloads are hosted on [BinTray](https://bintray.com/cockatrice/Cockatrice).
 -->
 
 
-- Latest stable main version: [ ![Download](https://api.bintray.com/packages/cockatrice/Cockatrice/Cockatrice/images/download.svg) ](https://bintray.com/cockatrice/Cockatrice/Cockatrice/_latestVersion#files)
+- Latest stable main release: [ ![Download](https://api.bintray.com/packages/cockatrice/Cockatrice/Cockatrice/images/download.svg) ](https://bintray.com/cockatrice/Cockatrice/Cockatrice/_latestVersion#files)
 - Latest development (unstable) version: [ ![Download](https://api.bintray.com/packages/cockatrice/Cockatrice/Cockatrice-git/images/download.svg) ](https://bintray.com/cockatrice/Cockatrice/Cockatrice-git/_latestVersion#files)
 
 # Get Involved [![Gitter chat](https://badges.gitter.im/Cockatrice/Cockatrice.png)](https://gitter.im/Cockatrice/Cockatrice)
