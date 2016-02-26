@@ -1,12 +1,12 @@
 .git/
-CONTRIBUTING.md
-Dockerfile
-TODO.md
+.github/
+.tx/
 build/
 cockatrice/
 doc/
 oracle/
-sounds/
+Dockerfile
+TODO.md
+appveyor.yml
 travis-compile.sh
 travis-dependencies.sh
-zonebg/
