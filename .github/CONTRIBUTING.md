@@ -2,17 +2,7 @@
 
 ### Compatibility ###
 
-Cockatrice is written in C++-03, so do not use C++11 constructs such as `auto`.
-
-Cockatrice support both Qt 4 and Qt 5, so make sure that your code compiles
-with both. If there have been breaking changes between Qt 4 and 5, use a
-statement such as
-
-    #if QT_VERSION >= 0x500000
-        doSomethingWithQt5();
-    #else
-        doSomethingWithQt4();
-    #endif
+Cockatrice is written in C++11, use of `auto` and other modern constructs is encouraged, even when working on older sections of the codebase that use older standards.
 
 For consistency, use Qt data structures where possible, such as `QString` over
 `std::string` or `QList` over `std::vector`.
