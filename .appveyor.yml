@@ -4,7 +4,7 @@ version: 2.4.1-branch-{branch}-build-{build}
 skip_commits:
   files:
     - .github/*
-    - .travis/*
+    - .travis/travis-*.sh
     - .tx/*
     - webclient/*
     - .*ignore
