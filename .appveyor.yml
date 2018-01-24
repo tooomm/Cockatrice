@@ -37,7 +37,7 @@ environment:
           target_arch: x86
           
 install:
-    - ./.travis/appveyor-dependencies.ps1
+    - ps: ./.travis/appveyor-dependencies.ps1
 
 before_build:
     - ps: ./.travis/appveyor-create_solutions.ps1
@@ -46,7 +46,7 @@ build_script:
     - ps: msbuild PACKAGE.vcxproj /p:Configuration=Release
 
 after_build:
-     - ps: ./.travis/appveyor-create_artifacts.ps1
+    - ps: ./.travis/appveyor-create_artifacts.ps1
         
 test: off
 
