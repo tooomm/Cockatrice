@@ -1,11 +1,3 @@
-if (Test-Path c:\openssl-release) {
-    echo "Using 'OpenSSL' from cache!"
-} else {
-    Invoke-WebRequest "https://indy.fulgan.com/SSL/openssl-$env:openssl_ver.zip" -OutFile c:\openssl-$env:openssl_ver.zip
-    Expand-Archive -Path c:\openssl-$env:openssl_ver.zip -DestinationPath c:\openssl-release
-    Set-Location -Path C:\openssl-release
-}
-
 if (Test-Path c:\protobuf-release) {
     echo "Using 'protobuf' from cache!"
 } else {
