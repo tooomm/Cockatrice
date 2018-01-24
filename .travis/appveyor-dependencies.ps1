@@ -1,5 +1,5 @@
 if (Test-Path c:\openssl-release) {
-    echo "Using "OpenSSL" from cache!"
+    echo "Using 'OpenSSL' from cache!"
 } else {
     Invoke-WebRequest "https://indy.fulgan.com/SSL/openssl-$env:openssl_ver.zip" -OutFile c:\openssl-$env:openssl_ver.zip
     Expand-Archive -Path c:\openssl-$env:openssl_ver.zip -DestinationPath c:\openssl-release
@@ -17,7 +17,7 @@ if (Test-Path c:\protobuf-release) {
 }
 
 if (Test-Path c:\zlib-release) {
-    echo "Using zlib from cache!"
+    echo "Using 'zlib' from cache!"
 } else {
     Invoke-WebRequest "https://github.com/madler/zlib/archive/v$env:zlib_ver.zip" -OutFile c:\zlib-$env:zlib_ver.zip
     Expand-Archive -Path c:\zlib-$env:zlib_ver.zip -DestinationPath c:\
