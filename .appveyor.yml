@@ -43,7 +43,7 @@ before_build:
     - ps: .\.travis\appveyor-create_solutions.ps1
 
 build_script:
-    - cmd: msbuild PACKAGE.vcxproj /p:Configuration=Release
+    - ps: msbuild PACKAGE.vcxproj /p:Configuration=Release
 
 after_build:
      - ps: .\.travis\appveyor-create_artifacts.ps1
