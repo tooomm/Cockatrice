@@ -37,13 +37,16 @@ environment:
           target_arch: x86
           
 install:
+    - pwd
     - ps: ./.travis/appveyor-dependencies.ps1
 
 before_build:
+    - pwd
     - ps: ./.travis/appveyor-create_solutions.ps1
 
 build_script:
-    - ps: msbuild PACKAGE.vcxproj /p:Configuration=Release
+    - pwd
+    - msbuild PACKAGE.vcxproj /p:Configuration=Release
 
 after_build:
     - pwd
