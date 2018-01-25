@@ -50,7 +50,7 @@ build_script:
 
 after_build:
     - pwd
-    - ps: ./.travis/appveyor-create_artifacts.ps1
+    - ps: ../.travis/appveyor-create_artifacts.ps1
         
 test: off
 
