@@ -46,6 +46,7 @@ build_script:
     - ps: msbuild PACKAGE.vcxproj /p:Configuration=Release
 
 after_build:
+    - pwd
     - ps: ./.travis/appveyor-create_artifacts.ps1
         
 test: off
