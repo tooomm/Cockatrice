@@ -42,10 +42,12 @@ install:
 
 before_build:
     - pwd
+    - cd c/projects/cockatrice
     - ps: ./.travis/appveyor-create_solutions.ps1
 
 build_script:
     - pwd
+    - cd c/projects/cockatrice
     - msbuild PACKAGE.vcxproj /p:Configuration=Release
 
 after_build:

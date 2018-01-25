@@ -6,7 +6,6 @@ if (Test-Path c:\protobuf-release) {
     Set-Location -Path C:\protobuf-$env:protobuf_ver\cmake
     cmake . -G "$env:cmake_generator" -T "$env:cmake_toolset" -Dprotobuf_BUILD_TESTS=0 -Dprotobuf_MSVC_STATIC_RUNTIME=0 -DCMAKE_INSTALL_PREFIX=c:/protobuf-release
     msbuild INSTALL.vcxproj /p:Configuration=Release
-    echo "Installed 'protobuf'"
 }
 
 if (Test-Path c:\zlib-release) {
@@ -17,5 +16,4 @@ if (Test-Path c:\zlib-release) {
     Set-Location -Path C:\zlib-$env:zlib_ver
     cmake . -G "$env:cmake_generator" -T "$env:cmake_toolset" -DCMAKE_INSTALL_PREFIX=c:/zlib-release
     msbuild INSTALL.vcxproj /p:Configuration=Release
-    echo "Installed 'ZLIB'"
 }
