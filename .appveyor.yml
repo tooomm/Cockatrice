@@ -18,18 +18,18 @@ skip_commits:
 image: Visual Studio 2015
 
 cache:
-    - c:\protobuf-release
-    - c:\zlib-release
+    - c:/protobuf-release
+    - c:/zlib-release
     
 environment:
     matrix:
-        - qt_ver: 5.9\msvc2015_64
+        - qt_ver: 5.9/msvc2015_64
           protobuf_ver: 3.4.1
           zlib_ver: 1.2.11
           cmake_generator: Visual Studio 14 2015 Win64
           cmake_toolset: v140,host=x64
           target_arch: x86_64
-        - qt_ver: 5.9\msvc2015
+        - qt_ver: 5.9/msvc2015
           protobuf_ver: 3.4.1
           zlib_ver: 1.2.11
           cmake_generator: Visual Studio 14 2015
