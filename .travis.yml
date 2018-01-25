@@ -46,6 +46,8 @@ addons:
 
 before_install: bash ./.travis/travis-dependencies.sh
 
+install: bash ./.travis/travis-ccache.sh
+
 script: bash ./.travis/travis-compile.sh
 
 after_success: "echo $TRAVIS_TAG $BUILDTYPE"
