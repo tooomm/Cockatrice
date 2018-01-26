@@ -46,7 +46,8 @@ addons:
 
 before_install: bash ./.travis/travis-dependencies.sh
 
-install: bash ./.travis/travis-ccache.sh
+install:
+  - if [ $TRAVIS_OS_NAME = linux ]; then brew install ccache; export PATH="/usr/local/opt/ccache/libexec:$PATH"; fi
 
 script: bash ./.travis/travis-compile.sh
 
