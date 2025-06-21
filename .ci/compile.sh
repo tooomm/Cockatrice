@@ -136,18 +136,6 @@ if [[ $USE_CCACHE ]]; then
 fi
 
 if [[ $USE_CCACHE ]]; then
-  echo "::group::Show ccache stats (verbose)"
-  ccache --show-config --verbose
-  echo "::endgroup::"
-fi
-
-if [[ $USE_CCACHE ]]; then
-  echo "::group::Show ccache stats (verbose verbose)"
-  ccache --show-config --verbose --verbose
-  echo "::endgroup::"
-fi
-
-if [[ $USE_CCACHE ]]; then
   echo "::group::Show ccache log stats"
   # ccache --show-log-stats
   echo "::endgroup::"
@@ -168,6 +156,18 @@ fi
 if [[ $USE_CCACHE ]]; then
   echo "::group::Show ccache stats"
   ccachestatsverbose
+  echo "::endgroup::"
+fi
+
+if [[ $USE_CCACHE ]]; then
+  echo "::group::Show ccache stats (verbose)"
+  ccache --show-stats --verbose
+  echo "::endgroup::"
+fi
+
+if [[ $USE_CCACHE ]]; then
+  echo "::group::Show ccache stats (verbose verbose)"
+  ccache --show-stats --verbose --verbose
   echo "::endgroup::"
 fi
 
