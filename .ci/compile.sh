@@ -136,38 +136,19 @@ if [[ $USE_CCACHE ]]; then
 fi
 
 if [[ $USE_CCACHE ]]; then
-  echo "::group::Show ccache log stats"
-  # ccache --show-log-stats
-  echo "::endgroup::"
-fi
-
-if [[ $USE_CCACHE ]]; then
-  echo "::group::Show ccache log stats (verbose)"
-  # ccache --show-log-stats --verbose
-  echo "::endgroup::"
-fi
-
-if [[ $USE_CCACHE ]]; then
-  echo "::group::Show ccache log stats (verbose verbose)"
-  # ccache --show-log-stats --verbose --verbose
+  echo "::group::Print ccache.conf"
+  if [ -f "${CCACHE_DIR}/ccache.conf" ]; then
+    echo "Contents of ccache.conf:"
+    cat "${CCACHE_DIR}/ccache.conf"
+    else
+      echo "No ccache.conf file found at ${CCACHE_DIR}/ccache.conf"
+  fi
   echo "::endgroup::"
 fi
 
 if [[ $USE_CCACHE ]]; then
   echo "::group::Show ccache stats"
   ccachestatsverbose
-  echo "::endgroup::"
-fi
-
-if [[ $USE_CCACHE ]]; then
-  echo "::group::Show ccache stats (verbose)"
-  ccache --show-stats --verbose
-  echo "::endgroup::"
-fi
-
-if [[ $USE_CCACHE ]]; then
-  echo "::group::Show ccache stats (verbose verbose)"
-  ccache --show-stats --verbose --verbose
   echo "::endgroup::"
 fi
 
