@@ -103,7 +103,7 @@ jobs:
       fail-fast: false
       matrix:
         # Dynamically expand build matrix according to needed Release/Debug build types
-        build_type: ${{ fromJson(needs.set_build_types.outputs.build_types) }}
+        build_type: ${{ fromJson(needs.configure.outputs.build_types) }}
         # The below builds correspond to the files in ".ci/$distro$version"
         include:
           - distro: Arch
@@ -225,7 +225,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build_type: ${{ fromJson(needs.set_build_types.outputs.build_types) }}
+        build_type: ${{ fromJson(needs.configure.outputs.build_types) }}
         exclude:
           - build_type: Debug
         include:
@@ -402,7 +402,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build_type: ${{ fromJson(needs.set_build_types.outputs.build_types) }}
+        build_type: ${{ fromJson(needs.configure.outputs.build_types) }}
         exclude:
           - build_type: Debug
         include:
