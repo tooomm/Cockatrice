@@ -144,9 +144,9 @@ jobs:
             version: 24.04
             package: DEB
 
-        exclude:
-          - distro: Arch    # Exclude release build for Arch as we are packaged in the community repo already
-            build_type: Release
+        # exclude:
+        #   - distro: Arch    # Exclude release build for Arch as we are packaged in the community repo already
+        #     build_type: Release
 
     name: ${{matrix.distro}} ${{matrix.version}} ${{matrix.build_type}}
     needs: configuration
