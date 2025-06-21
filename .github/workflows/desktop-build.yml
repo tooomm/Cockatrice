@@ -113,6 +113,8 @@ jobs:
       fail-fast: false
       matrix:
         # Dynamically expand build matrix according to needed Release/Debug build types
+        # build_type: ${{ fromJson(needs.configuration.outputs.build_types) }}
+        build_type: [Debug, Release]
         # The below builds correspond to the files in ".ci/$distro$version"
         include:
           - distro: Arch
@@ -145,8 +147,6 @@ jobs:
         exclude:
           - distro: Arch    # Exclude release build for Arch as we are packaged in the community repo already
             build_type: Release
-
-        build_type: ${{ fromJson(needs.configuration.outputs.build_types) }}
 
     name: ${{matrix.distro}} ${{matrix.version}} ${{matrix.build_type}}
     needs: configuration
