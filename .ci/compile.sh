@@ -130,19 +130,8 @@ function ccachestatsverbose() {
 # Compile
 
 if [[ $USE_CCACHE ]]; then
-  echo "::group::Show ccache configuration"
+  echo "::group::Show ccache config"
   ccache --show-config
-  echo "::endgroup::"
-fi
-
-if [[ $USE_CCACHE ]]; then
-  echo "::group::Print ccache.conf"
-  if [ -f "${CCACHE_DIR}/ccache.conf" ]; then
-    echo "Contents of ccache.conf:"
-    cat "${CCACHE_DIR}/ccache.conf"
-    else
-      echo "No ccache.conf file found at ${CCACHE_DIR}/ccache.conf"
-  fi
   echo "::endgroup::"
 fi
 
