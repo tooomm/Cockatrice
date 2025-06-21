@@ -127,6 +127,12 @@ function ccachestatsverbose() {
   fi
 }
 
+if [[ $USE_CCACHE ]]; then
+  echo "::group::Show ccache config"
+  ccache --show-config
+  echo "::endgroup::"
+fi
+
 # Compile
 if [[ $USE_CCACHE ]]; then
   echo "::group::Show ccache stats"
