@@ -128,9 +128,46 @@ function ccachestatsverbose() {
 }
 
 # Compile
+
+if [[ $USE_CCACHE ]]; then
+  echo "::group::Show ccache configuration"
+  ccache --show-config
+  echo "::endgroup::"
+fi
+
+if [[ $USE_CCACHE ]]; then
+  echo "::group::Show ccache log stats"
+  ccache --show-log-stats
+  echo "::endgroup::"
+fi
+
+if [[ $USE_CCACHE ]]; then
+  echo "::group::Show ccache log stats (verbose)"
+  ccache --show-log-stats --verbose
+  echo "::endgroup::"
+fi
+
+if [[ $USE_CCACHE ]]; then
+  echo "::group::Show ccache log stats (verbose verbose)"
+  ccache --show-log-stats --verbose --verbose
+  echo "::endgroup::"
+fi
+
 if [[ $USE_CCACHE ]]; then
   echo "::group::Show ccache stats"
   ccachestatsverbose
+  echo "::endgroup::"
+fi
+
+if [[ $USE_CCACHE ]]; then
+  echo "::group::Show ccache stats (verbose)"
+  ccache --show-config --verbose
+  echo "::endgroup::"
+fi
+
+if [[ $USE_CCACHE ]]; then
+  echo "::group::Show ccache stats (verbose verbose)"
+  ccache --show-config --verbose --verbose
   echo "::endgroup::"
 fi
 
@@ -152,6 +189,8 @@ echo "::endgroup::"
 if [[ $USE_CCACHE ]]; then
   echo "::group::Show ccache stats again"
   ccachestatsverbose
+  # Zero cache statistics at the end - useful?
+  # ccache --zero-stats
   echo "::endgroup::"
 fi
 
