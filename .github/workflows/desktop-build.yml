@@ -35,6 +35,7 @@ jobs:
     outputs:
       tag: ${{steps.configure.outputs.tag}}
       sha: ${{steps.configure.outputs.sha}}
+      build_types: ${{steps.set_build_types.outputs.build_types}}
 
     steps:  
       - name: Configure
