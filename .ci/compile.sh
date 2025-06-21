@@ -159,7 +159,7 @@ echo "::endgroup::"
 if [[ $USE_CCACHE ]]; then
   echo "::group::Show ccache stats again"
   ccachestatsverbose
-  # Zero cache statistics at the end - useful?
+  # Zero cache statistics at the end - useful? Clear at the beginning before the build instead?
   # ccache --zero-stats
   echo "::endgroup::"
 fi
