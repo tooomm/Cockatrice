@@ -29,52 +29,68 @@ concurrency:
   cancel-in-progress: ${{ github.ref_name != 'master' }}
 
 jobs:
-  configure:
-    name: Configure
+  configuration:
+    name: Configuration
     runs-on: ubuntu-latest
     outputs:
-      tag: ${{steps.configure.outputs.tag}}
-      sha: ${{steps.configure.outputs.sha}}
+      tag: ${{steps.set_references.outputs.tag}}
+      sha: ${{steps.set_references.outputs.sha}}
+      build_types: ${{steps.set_build_types.outputs.build_types}}
 
     steps:  
-      - name: Configure
-        id: configure
+      - name: Define context references
+        id: set_references
         shell: bash
         run: |
           tag_regex='^refs/tags/'
-          if [[ $GITHUB_EVENT_NAME == pull-request ]]; then    # pull request
+          if [[ $GITHUB_EVENT_NAME == pull_request ]]; then    # pull request
             sha="${{github.event.pull_request.head.sha}}"
           elif [[ $GITHUB_REF =~ $tag_regex ]]; then    # release
             sha="$GITHUB_SHA"
             tag="${GITHUB_REF/refs\/tags\//}"
-            echo "tag=$tag" >>"$GITHUB_OUTPUT"
+            echo "tag=$tag" >> "$GITHUB_OUTPUT"
           else    # push to branch
             sha="$GITHUB_SHA"
           fi
-          echo "sha=$sha" >>"$GITHUB_OUTPUT"
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+
+      - name: Define build types
+        id: set_build_types
+        shell: bash
+        run: |
+          build_types='["Debug"]'
+          if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == "refs/heads/master" ]]; then
+            build_types='["Debug", "Release"]'
+          elif [[ "${{ github.ref }}" =~ ^refs/tags/ ]]; then
+            build_types='["Release"]'
+          fi
+          echo "build_types=$build_types" >> $GITHUB_OUTPUT
+          echo "DEBUG: build_types=$build_types"
+          ls -l $GITHUB_OUTPUT || true
+          cat $GITHUB_OUTPUT || true
 
       - name: Checkout
-        if: steps.configure.outputs.tag != null
+        if: steps.set_references.outputs.tag != null
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Prepare release parameters
         id: prepare
-        if: steps.configure.outputs.tag != null
+        if: steps.set_references.outputs.tag != null
         shell: bash
         env:
-          TAG: ${{steps.configure.outputs.tag}}
+          TAG: ${{steps.set_references.outputs.tag}}
         run: .ci/prep_release.sh
 
       - name: Create release
-        if: steps.configure.outputs.tag != null
+        if: steps.set_references.outputs.tag != null
         id: create_release
         shell: bash
         env:
           GH_TOKEN: ${{github.token}}
-          tag_name: ${{steps.configure.outputs.tag}}
-          target: ${{steps.configure.outputs.sha}}
+          tag_name: ${{steps.set_references.outputs.tag}}
+          target: ${{steps.set_references.outputs.sha}}
           release_name: ${{steps.prepare.outputs.title}}
           body_path: ${{steps.prepare.outputs.body_path}}
           prerelease: ${{steps.prepare.outputs.is_beta}}
@@ -86,20 +102,26 @@ jobs:
               --target "$target" --title "$release_name" \
               --notes-file "$body_path"
 
+      - name: Debug outputs
+        run: |
+          echo "::notice::tag=${{steps.set_references.outputs.tag}}"
+          echo "::notice::sha=${{steps.set_references.outputs.sha}}"
+          echo "::notice::build_types=${{steps.set_build_types.outputs.build_types}}"
+
   build-linux:
     strategy:
       fail-fast: false
       matrix:
-        # These names correspond to the files in ".ci/$distro$version"
+        # Dynamically expand build matrix according to needed Release/Debug build types
+        build_type: ${{ fromJson(needs.configuration.outputs.build_types) }}
+        # The below builds correspond to the files in ".ci/$distro$version"
         include:
           - distro: Arch
-            package: skip    # We are packaged in Arch already
             allow-failure: yes
 
           - distro: Debian
             version: 11
             package: DEB
-            test: skip    # Running tests on all distros is superfluous
 
           - distro: Debian
             version: 12
@@ -108,7 +130,6 @@ jobs:
           - distro: Fedora
             version: 41
             package: RPM
-            test: skip    # Running tests on all distros is superfluous
 
           - distro: Fedora
             version: 42
@@ -117,22 +138,25 @@ jobs:
           - distro: Ubuntu
             version: 22.04
             package: DEB
-            test: skip    # Running tests on all distros is superfluous
 
           - distro: Ubuntu
             version: 24.04
             package: DEB
 
-    name: ${{matrix.distro}} ${{matrix.version}}
-    needs: configure
+        exclude:
+          - distro: Arch    # Exclude release build for Arch as we are packaged in the community repo already
+            build_type: Release
+
+    name: ${{matrix.distro}} ${{matrix.version}} ${{matrix.build_type}}
+    needs: configuration
     runs-on: ubuntu-latest
     continue-on-error: ${{matrix.allow-failure == 'yes'}}
     env:
       NAME: ${{matrix.distro}}${{matrix.version}}
-      CACHE: ${{github.workspace}}/.cache/${{matrix.distro}}${{matrix.version}}   # directory for caching docker image and ccache
+      CACHE: ${{github.workspace}}/.cache/${{matrix.distro}}${{matrix.version}}-${{matrix.build_type}}   # directory for caching docker image and ccache
       # Cache size over the entire repo is 10Gi:
       # https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#usage-limits-and-eviction-policy
-      CCACHE_SIZE: 500M
+      CCACHE_SIZE: 400M
       CMAKE_GENERATOR: 'Ninja'
 
     steps:
@@ -146,36 +170,29 @@ jobs:
           BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
         with:
           path: ${{env.CACHE}}
-          key: ccache-${{matrix.distro}}${{matrix.version}}-${{env.BRANCH_NAME}}
-          restore-keys: ccache-${{matrix.distro}}${{matrix.version}}-
+          key: ccache-${{matrix.distro}}${{matrix.version}}-${{matrix.build_type}}-${{env.BRANCH_NAME}}
+          restore-keys: ccache-${{matrix.distro}}${{matrix.version}}-${{matrix.build_type}}-
 
       - name: Build ${{matrix.distro}} ${{matrix.version}} Docker image
         shell: bash
         run: source .ci/docker.sh --build
 
-      - name: Build debug and test
-        if: matrix.test != 'skip'
-        shell: bash
-        env:
-          CMAKE_GENERATOR: '${{env.CMAKE_GENERATOR}}'
-        run: |
-          source .ci/docker.sh
-          RUN --server --debug --test --ccache "$CCACHE_SIZE"
-
-      - name: Build release package
-        id: build
-        if: matrix.package != 'skip'
+      - name: Build ${{matrix.build_type}}${{ matrix.build_type == 'Debug' && ' and run Tests' || '' }}
         shell: bash
         env:
           BUILD_DIR: build
           SUFFIX: '-${{matrix.distro}}${{matrix.version}}'
-          package: '${{matrix.package}}'
           CMAKE_GENERATOR: '${{env.CMAKE_GENERATOR}}'
         run: |
           source .ci/docker.sh
-          RUN --server --release --package "$package" --dir "$BUILD_DIR" \
-                  --ccache "$CCACHE_SIZE"
-          .ci/name_build.sh
+          # Release + Package
+          if [[ "${{matrix.build_type}}" == "Release" ]]; then
+            RUN --server --release --package "${{matrix.package}}" --dir "$BUILD_DIR" --ccache "$CCACHE_SIZE"
+            .ci/name_build.sh
+          # Debug + Test
+          else
+            RUN --server --debug --test --dir "$BUILD_DIR" --ccache "$CCACHE_SIZE"
+          fi
 
       - name: Save compiler cache (ccache)
         if: github.ref == 'refs/heads/master'
@@ -195,11 +212,11 @@ jobs:
 
       - name: Upload to release
         id: upload_release
-        if: matrix.package != 'skip' && needs.configure.outputs.tag != null
+        if: matrix.package != 'skip' && needs.configuration.outputs.tag != null
         shell: bash
         env:
           GH_TOKEN: ${{github.token}}
-          tag_name: ${{needs.configure.outputs.tag}}
+          tag_name: ${{needs.configuration.outputs.tag}}
           asset_path: ${{steps.build.outputs.path}}
           asset_name: ${{steps.build.outputs.name}}
         run: gh release upload "$tag_name" "$asset_path#$asset_name"
@@ -222,41 +239,35 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        build_type: ${{ fromJson(needs.configuration.outputs.build_types) }}
+        exclude:
+          - build_type: Debug
         include:
           - target: 13
             soc: Intel
             os: macos-13
             xcode: "14.3.1"
-            type: Release
             make_package: 1
 
           - target: 14
             soc: Apple
             os: macos-14
             xcode: "15.4"
-            type: Release
             make_package: 1
 
           - target: 15
             soc: Apple
             os: macos-15
             xcode: "16.2"
-            type: Release
             make_package: 1
 
-          - target: 15
-            soc: Apple
-            os: macos-15
-            xcode: "16.2"
-            type: Debug
-
-    name: macOS ${{matrix.target}}${{ matrix.soc == 'Intel' && ' Intel' || '' }}${{ matrix.type == 'Debug' && ' Debug' || '' }}
-    needs: configure
+    name: macOS ${{matrix.target}}${{ matrix.soc == 'Intel' && ' Intel' || '' }} ${{ matrix.build_type }}
+    needs: configuration
     runs-on: ${{matrix.os}}
     continue-on-error: ${{matrix.allow-failure == 'yes'}}
     env:
-      CCACHE_DIR: ${{github.workspace}}/.ccache/${{matrix.os}}-${{matrix.type}}
-      CCACHE_SIZE: 500M
+      CCACHE_DIR: ${{github.workspace}}/.ccache/macOS${{matrix.target}}-${{matrix.build_type}}
+      CCACHE_SIZE: 400M
       DEVELOPER_DIR:
         /Applications/Xcode_${{matrix.xcode}}.app/Contents/Developer
       CMAKE_GENERATOR: 'Ninja'
@@ -282,14 +293,14 @@ jobs:
           BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
         with:
           path: ${{env.CCACHE_DIR}}
-          key: ccache-${{matrix.os}}-${{matrix.type}}-${{env.BRANCH_NAME}}
-          restore-keys: ccache-${{matrix.os}}-${{matrix.type}}-
+          key: ccache-macOS${{matrix.target}}-${{matrix.build_type}}-${{env.BRANCH_NAME}}
+          restore-keys: ccache-macOS${{matrix.target}}-${{matrix.build_type}}-
 
       - name: Build & Sign on Xcode ${{matrix.xcode}}
         shell: bash
         id: build
         env:
-          BUILDTYPE: '${{matrix.type}}'
+          BUILDTYPE: '${{matrix.build_type}}'
           MAKE_PACKAGE: '${{matrix.make_package}}'
           PACKAGE_SUFFIX: '-macOS${{matrix.target}}_${{matrix.soc}}'
           MACOS_CERTIFICATE: ${{ secrets.PROD_MACOS_CERTIFICATE }}
@@ -312,6 +323,12 @@ jobs:
           echo "::endgroup::"
           .ci/compile.sh --server --test --ccache "$CCACHE_SIZE"
 
+          if [[ "${{matrix.build_type}}" == "Debug" ]]; then
+            .ci/compile.sh --server --test --ccache "$CCACHE_SIZE"
+          else
+            .ci/compile.sh --server --ccache "$CCACHE_SIZE"
+          fi
+
       - name: Save compiler cache (ccache)
         if: github.ref == 'refs/heads/master'
         uses: actions/cache/save@v4
@@ -320,7 +337,7 @@ jobs:
           key: ${{ steps.ccache_restore.outputs.cache-primary-key }}
 
       - name: Sign app bundle
-        if: matrix.make_package && (github.ref == 'refs/heads/master' || needs.configure.outputs.tag != null)
+        if: matrix.make_package && (github.ref == 'refs/heads/master' || needs.configuration.outputs.tag != null)
         env:
           MACOS_CERTIFICATE_NAME: ${{ secrets.PROD_MACOS_CERTIFICATE_NAME }}
           MACOS_CI_KEYCHAIN_PWD: ${{ secrets.PROD_MACOS_CI_KEYCHAIN_PWD }}
@@ -332,7 +349,7 @@ jobs:
           fi
 
       - name: Notarize app bundle
-        if: matrix.make_package && (github.ref == 'refs/heads/master' || needs.configure.outputs.tag != null)
+        if: matrix.make_package && (github.ref == 'refs/heads/master' || needs.configuration.outputs.tag != null)
         env:
           MACOS_NOTARIZATION_APPLE_ID: ${{ secrets.PROD_MACOS_NOTARIZATION_APPLE_ID }}
           MACOS_NOTARIZATION_TEAM_ID: ${{ secrets.PROD_MACOS_NOTARIZATION_TEAM_ID }}
@@ -374,11 +391,11 @@ jobs:
 
       - name: Upload to release
         id: upload_release
-        if: matrix.make_package && needs.configure.outputs.tag != null
+        if: matrix.make_package && needs.configuration.outputs.tag != null
         shell: bash
         env:
           GH_TOKEN: ${{github.token}}
-          tag_name: ${{needs.configure.outputs.tag}}
+          tag_name: ${{needs.configuration.outputs.tag}}
           asset_path: ${{steps.build.outputs.path}}
           asset_name: ${{steps.build.outputs.name}}
         run: gh release upload "$tag_name" "$asset_path#$asset_name"
@@ -401,6 +418,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        build_type: ${{ fromJson(needs.configuration.outputs.build_types) }}
+        exclude:
+          - build_type: Debug
         include:
           - target: 7
             qt_version: 5.15.*
@@ -412,7 +432,7 @@ jobs:
             qt_modules: "qtimageformats qtmultimedia qtwebsockets"
 
     name: Windows ${{matrix.target}}
-    needs: configure
+    needs: configuration
     runs-on: windows-2022
     env:
       CMAKE_GENERATOR: 'Visual Studio 17 2022'
@@ -478,11 +498,11 @@ jobs:
 
       - name: Upload to release
         id: upload_release
-        if: needs.configure.outputs.tag != null
+        if: needs.configuration.outputs.tag != null
         shell: bash
         env:
           GH_TOKEN: ${{github.token}}
-          tag_name: ${{needs.configure.outputs.tag}}
+          tag_name: ${{needs.configuration.outputs.tag}}
           asset_path: ${{steps.build.outputs.path}}
           asset_name: ${{steps.build.outputs.name}}
         run: gh release upload "$tag_name" "$asset_path#$asset_name"
