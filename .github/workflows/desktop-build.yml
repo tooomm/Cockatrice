@@ -43,7 +43,7 @@ jobs:
         shell: bash
         run: |
           tag_regex='^refs/tags/'
-          if [[ $GITHUB_EVENT_NAME == pull-request ]]; then    # pull request
+          if [[ $GITHUB_EVENT_NAME == pull_request ]]; then    # pull request
             sha="${{github.event.pull_request.head.sha}}"
           elif [[ $GITHUB_REF =~ $tag_regex ]]; then    # release
             sha="$GITHUB_SHA"
