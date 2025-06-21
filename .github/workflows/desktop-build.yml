@@ -65,6 +65,9 @@ jobs:
             build_types='["Release"]'
           fi
           echo "build_types=$build_types" >> $GITHUB_OUTPUT
+          echo "DEBUG: build_types=$build_types"
+          ls -l $GITHUB_OUTPUT || true
+          cat $GITHUB_OUTPUT || true
 
       - name: Checkout
         if: steps.set_references.outputs.tag != null
