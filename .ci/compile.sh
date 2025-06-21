@@ -128,6 +128,13 @@ function ccachestatsverbose() {
 }
 
 # Compile
+
+if [[ $USE_CCACHE ]]; then
+  echo "::group::Show ccache config"
+  ccache --show-config
+  echo "::endgroup::"
+fi
+
 if [[ $USE_CCACHE ]]; then
   echo "::group::Show ccache stats"
   ccachestatsverbose
@@ -152,6 +159,8 @@ echo "::endgroup::"
 if [[ $USE_CCACHE ]]; then
   echo "::group::Show ccache stats again"
   ccachestatsverbose
+  # Zero cache statistics at the end - useful? Clear at the beginning before the build instead?
+  # ccache --zero-stats
   echo "::endgroup::"
 fi
 
@@ -169,7 +178,6 @@ fi
 
 if [[ $MAKE_PACKAGE ]]; then
   echo "::group::Create package"
-  
   if [[ $RUNNER_OS == macOS ]]; then
     # Workaround https://github.com/actions/runner-images/issues/7522
     echo "killing XProtectBehaviorService"; sudo pkill -9 XProtect >/dev/null || true;
@@ -177,7 +185,6 @@ if [[ $MAKE_PACKAGE ]]; then
   fi
   cmake --build . --target package --config "$BUILDTYPE"
   echo "::endgroup::"
-
   if [[ $PACKAGE_SUFFIX ]]; then
     echo "::group::Update package name"
     cd ..
