@@ -107,7 +107,6 @@ jobs:
         # The below builds correspond to the files in ".ci/$distro$version"
         include:
           - distro: Arch
-            package: skip    # We are packaged in Arch already
             allow-failure: yes
 
           - distro: Debian
@@ -133,6 +132,10 @@ jobs:
           - distro: Ubuntu
             version: 24.04
             package: DEB
+
+        exclude:
+          - distro: Arch    # Exclude release build for Arch as we are packaged in the community repo already
+            build_type: Release
 
     name: ${{matrix.distro}} ${{matrix.version}} ${{matrix.build_type}}
     needs: configure
@@ -172,14 +175,11 @@ jobs:
           CMAKE_GENERATOR: '${{env.CMAKE_GENERATOR}}'
         run: |
           source .ci/docker.sh
-          # Release with packaging
-          if [[ "${{matrix.build_type}}" == "Release" && "${{matrix.package}}" != "skip" ]]; then
+          # Release + Package
+          if [[ "${{matrix.build_type}}" == "Release" ]]; then
             RUN --server --release --package "${{matrix.package}}" --dir "$BUILD_DIR" --ccache "$CCACHE_SIZE"
             .ci/name_build.sh
-          # Release without packaging
-          elif [[ "${{matrix.build_type}}" == "Release" ]]; then
-            RUN --server --release --dir "$BUILD_DIR" --ccache "$CCACHE_SIZE"
-          # Debug & Test
+          # Debug + Test
           else
             RUN --server --debug --test --dir "$BUILD_DIR" --ccache "$CCACHE_SIZE"
           fi
