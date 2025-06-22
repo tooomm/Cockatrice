@@ -35,7 +35,7 @@ jobs:
     outputs:
       tag: ${{steps.set_references.outputs.tag}}
       sha: ${{steps.set_references.outputs.sha}}
-      build_types: ${{steps.set_build_types.outputs.build_types}}
+      build_type: ${{steps.set_build_type.outputs.build_type}}
 
     steps:  
       - name: Define context references
@@ -54,18 +54,17 @@ jobs:
           fi
           echo "sha=$sha" >> "$GITHUB_OUTPUT"
 
-      - name: Define build types
-        id: set_build_types
+      - name: Define build type
+        id: set_build_type
         shell: bash
         run: |
-          build_types='["Debug"]'
-          if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == "refs/heads/master" ]]; then
-            build_types='["Debug", "Release"]'
-          elif [[ "${{ github.ref }}" =~ ^refs/tags/ ]]; then
-            build_types='["Release"]'
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            build_type="Debug"
+          else
+            build_type="Release"
           fi
-          echo "build_types=$build_types" >> $GITHUB_OUTPUT
-          echo "DEBUG: build_types=$build_types"
+          echo "build_type=$build_type" >> $GITHUB_OUTPUT
+          echo "DEBUG: build_type=$build_type"
           ls -l $GITHUB_OUTPUT || true
           cat $GITHUB_OUTPUT || true
 
@@ -106,53 +105,47 @@ jobs:
         run: |
           echo "::notice::tag=${{steps.set_references.outputs.tag}}"
           echo "::notice::sha=${{steps.set_references.outputs.sha}}"
-          echo "::notice::build_types=${{steps.set_build_types.outputs.build_types}}"
+          echo "::notice::build_type=${{steps.set_build_type.outputs.build_type}}"
 
   build-linux:
     strategy:
       fail-fast: false
       matrix:
-        # Dynamically expand build matrix according to needed Release/Debug build types
-        # build_type: ${{ fromJson(needs.configuration.outputs.build_types) }}
         # The below builds correspond to the files in ".ci/$distro$version"
         include:
           - distro: Arch
+            build_type: ${{ needs.configuration.outputs.build_type }}
             allow-failure: yes
-            build_type: ${{ fromJson(needs.configuration.outputs.build_types) }}
 
           - distro: Debian
             version: 11
+            build_type: ${{ needs.configuration.outputs.build_type }}
             package: DEB
-            build_type: ${{ fromJson(needs.configuration.outputs.build_types) }}
 
           - distro: Debian
             version: 12
+            build_type: ${{ needs.configuration.outputs.build_type }}
             package: DEB
-            build_type: ${{ fromJson(needs.configuration.outputs.build_types) }}
 
           - distro: Fedora
             version: 41
+            build_type: ${{ needs.configuration.outputs.build_type }}
             package: RPM
-            build_type: ${{ fromJson(needs.configuration.outputs.build_types) }}
 
           - distro: Fedora
             version: 42
+            build_type: ${{ needs.configuration.outputs.build_type }}
             package: RPM
-            build_type: ${{ fromJson(needs.configuration.outputs.build_types) }}
 
           - distro: Ubuntu
             version: 22.04
+            build_type: ${{ needs.configuration.outputs.build_type }}
             package: DEB
-            build_type: ${{ fromJson(needs.configuration.outputs.build_types) }}
 
           - distro: Ubuntu
             version: 24.04
+            build_type: ${{ needs.configuration.outputs.build_type }}
             package: DEB
-            build_type: ${{ fromJson(needs.configuration.outputs.build_types) }}
-
-        exclude:
-          - distro: Arch    # Exclude release build for Arch as we are packaged in the community repo already
-            build_type: Release
 
     name: ${{matrix.distro}} ${{matrix.version}} ${{matrix.build_type}}
     needs: configuration
@@ -184,21 +177,22 @@ jobs:
         shell: bash
         run: source .ci/docker.sh --build
 
-      - name: Build ${{matrix.build_type}}${{ matrix.build_type == 'Debug' && ' and run Tests' || '' }}
+      - name: Build ${{matrix.build_type}}${{ matrix.build_type == 'Debug' && ' and run tests' || '' }}
+        id: build
         shell: bash
         env:
           BUILD_DIR: build
-          SUFFIX: '-${{matrix.distro}}${{matrix.version}}'
+          SUFFIX: '-${{matrix.distro}}${{matrix.version}}-${{matrix.build_type}}'
           CMAKE_GENERATOR: '${{env.CMAKE_GENERATOR}}'
         run: |
           source .ci/docker.sh
           # Release + Package
           if [[ "${{matrix.build_type}}" == "Release" ]]; then
-            RUN --server --release --package "${{matrix.package}}" --dir "$BUILD_DIR" --ccache "$CCACHE_SIZE"
-            .ci/name_build.sh
+            RUN --server --package "${{matrix.package}}" --dir "$BUILD_DIR" --ccache "$CCACHE_SIZE" --release
           # Debug + Test
           else
-            RUN --server --debug --test --dir "$BUILD_DIR" --ccache "$CCACHE_SIZE"
+            RUN --server --package "${{matrix.package}}" --dir "$BUILD_DIR" --ccache "$CCACHE_SIZE" --debug --test
+          .ci/name_build.sh
           fi
 
       - name: Save compiler cache (ccache)
@@ -210,16 +204,15 @@ jobs:
 
       - name: Upload artifact
         id: upload_artifact
-        if: matrix.package != 'skip'
         uses: actions/upload-artifact@v4
         with:
-          name: ${{matrix.distro}}${{matrix.version}}-package
+          name: ${{matrix.distro}}${{matrix.version}}-${{matrix.build_type}}-package
           path: ${{steps.build.outputs.path}}
           if-no-files-found: error
 
       - name: Upload to release
         id: upload_release
-        if: matrix.package != 'skip' && needs.configuration.outputs.tag != null
+        if: matrix.package != '' && needs.configuration.outputs.tag != null
         shell: bash
         env:
           GH_TOKEN: ${{github.token}}
@@ -246,23 +239,25 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build_type: ${{ fromJson(needs.configuration.outputs.build_types) }}
         exclude:
           - build_type: Debug
         include:
           - target: 13
+            build_type: ${{ needs.configuration.outputs.build_type }}
             soc: Intel
             os: macos-13
             xcode: "14.3.1"
             make_package: 1
 
           - target: 14
+            build_type: ${{ needs.configuration.outputs.build_type }}
             soc: Apple
             os: macos-14
             xcode: "15.4"
             make_package: 1
 
           - target: 15
+            build_type: ${{ needs.configuration.outputs.build_type }}
             soc: Apple
             os: macos-15
             xcode: "16.2"
@@ -425,15 +420,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build_type: ${{ fromJson(needs.configuration.outputs.build_types) }}
-        exclude:
-          - build_type: Debug
         include:
           - target: 7
+            build_type: ${{ needs.configuration.outputs.build_type }}
             qt_version: 5.15.*
             qt_arch: msvc2019_64
 
           - target: 10
+            build_type: ${{ needs.configuration.outputs.build_type }}
             qt_version: 6.6.*
             qt_arch: msvc2019_64
             qt_modules: "qtimageformats qtmultimedia qtwebsockets"
