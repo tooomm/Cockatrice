@@ -147,10 +147,6 @@ jobs:
             build_type: ${{ needs.configuration.outputs.build_type }}
             package: DEB
 
-        exclude:
-          - distro: Arch    # Exclude release build for Arch as we are packaged in the community repo already
-            build_type: Release
-
     name: ${{matrix.distro}} ${{matrix.version}} ${{matrix.build_type}}
     needs: configuration
     runs-on: ubuntu-latest
@@ -208,7 +204,6 @@ jobs:
 
       - name: Upload artifact
         id: upload_artifact
-        if: matrix.package != 'skip'
         uses: actions/upload-artifact@v4
         with:
           name: ${{matrix.distro}}${{matrix.version}}-package
@@ -217,7 +212,7 @@ jobs:
 
       - name: Upload to release
         id: upload_release
-        if: matrix.package != 'skip' && needs.configuration.outputs.tag != null
+        if: matrix.package != '' && needs.configuration.outputs.tag != null
         shell: bash
         env:
           GH_TOKEN: ${{github.token}}
