@@ -111,42 +111,36 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # Dynamically expand build matrix according to needed Release/Debug build types
+        # Dynamically expand build matrix according to needed Release/Debug build type
+        build_type: ${{ needs.configuration.outputs.build_type }}
         # The below builds correspond to the files in ".ci/$distro$version"
         include:
           - distro: Arch
             allow-failure: yes
-            build_type: ${{ needs.configuration.outputs.build_type }}
 
           - distro: Debian
             version: 11
             package: DEB
-            build_type: ${{ needs.configuration.outputs.build_type }}
 
           - distro: Debian
             version: 12
             package: DEB
-            build_type: ${{ needs.configuration.outputs.build_type }}
 
           - distro: Fedora
             version: 41
             package: RPM
-            build_type: ${{ needs.configuration.outputs.build_type }}
 
           - distro: Fedora
             version: 42
             package: RPM
-            build_type: ${{ needs.configuration.outputs.build_type }}
 
           - distro: Ubuntu
             version: 22.04
             package: DEB
-            build_type: ${{ needs.configuration.outputs.build_type }}
 
           - distro: Ubuntu
             version: 24.04
             package: DEB
-            build_type: ${{ needs.configuration.outputs.build_type }}
 
         # exclude:
         #   - distro: Arch    # Exclude release build for Arch as we are packaged in the community repo already
@@ -183,6 +177,7 @@ jobs:
         run: source .ci/docker.sh --build
 
       - name: Build ${{matrix.build_type}}${{ matrix.build_type == 'Debug' && ' and run tests' || '' }}
+        id: build
         shell: bash
         env:
           BUILD_DIR: build
