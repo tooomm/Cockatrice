@@ -182,7 +182,7 @@ jobs:
         shell: bash
         env:
           BUILD_DIR: build
-          SUFFIX: '-${{matrix.distro}}${{matrix.version}}'
+          SUFFIX: '-${{matrix.distro}}${{matrix.version}}-${{matrix.build_type}}'
           CMAKE_GENERATOR: '${{env.CMAKE_GENERATOR}}'
         run: |
           source .ci/docker.sh
@@ -206,7 +206,7 @@ jobs:
         id: upload_artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{matrix.distro}}${{matrix.version}}-package
+          name: ${{matrix.distro}}${{matrix.version}}-${{matrix.build_type}}-package
           path: ${{steps.build.outputs.path}}
           if-no-files-found: error
 
