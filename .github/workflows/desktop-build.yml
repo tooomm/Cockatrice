@@ -239,23 +239,25 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build_type: ${{ needs.configuration.outputs.build_type }}
         exclude:
           - build_type: Debug
         include:
           - target: 13
+            build_type: ${{ needs.configuration.outputs.build_type }}
             soc: Intel
             os: macos-13
             xcode: "14.3.1"
             make_package: 1
 
           - target: 14
+            build_type: ${{ needs.configuration.outputs.build_type }}
             soc: Apple
             os: macos-14
             xcode: "15.4"
             make_package: 1
 
           - target: 15
+            build_type: ${{ needs.configuration.outputs.build_type }}
             soc: Apple
             os: macos-15
             xcode: "16.2"
@@ -418,15 +420,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build_type: ${{ needs.configuration.outputs.build_type }}
-        exclude:
-          - build_type: Debug
         include:
           - target: 7
+            build_type: ${{ needs.configuration.outputs.build_type }}
             qt_version: 5.15.*
             qt_arch: msvc2019_64
 
           - target: 10
+            build_type: ${{ needs.configuration.outputs.build_type }}
             qt_version: 6.6.*
             qt_arch: msvc2019_64
             qt_modules: "qtimageformats qtmultimedia qtwebsockets"
