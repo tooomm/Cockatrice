@@ -58,11 +58,11 @@ jobs:
         id: set_build_types
         shell: bash
         run: |
-          build_types='["Debug"]'
+          build_type='[\"Debug\"]'
           if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == "refs/heads/master" ]]; then
-            build_types='["Debug", "Release"]'
+            build_types='[\"Debug\", \"Release\"]'
           elif [[ "${{ github.ref }}" =~ ^refs/tags/ ]]; then
-            build_types='["Release"]'
+            build_types='[\"Release\"]'
           fi
           echo "build_types=$build_types" >> $GITHUB_OUTPUT
           echo "DEBUG: build_types=$build_types"
@@ -149,9 +149,9 @@ jobs:
             package: DEB
             build_type: ${{ fromJson(needs.configuration.outputs.build_types) }}
 
-        exclude:
-          - distro: Arch    # Exclude release build for Arch as we are packaged in the community repo already
-            build_type: Release
+        # exclude:
+        #   - distro: Arch    # Exclude release build for Arch as we are packaged in the community repo already
+        #     build_type: Release
 
     name: ${{matrix.distro}} ${{matrix.version}} ${{matrix.build_type}}
     needs: configuration
