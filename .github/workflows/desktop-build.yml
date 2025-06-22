@@ -111,40 +111,45 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # Dynamically expand build matrix according to needed Release/Debug build type
-        build_type: ${{ needs.configuration.outputs.build_type }}
         # The below builds correspond to the files in ".ci/$distro$version"
         include:
           - distro: Arch
+            build_type: ${{ needs.configuration.outputs.build_type }}
             allow-failure: yes
 
           - distro: Debian
             version: 11
+            build_type: ${{ needs.configuration.outputs.build_type }}
             package: DEB
 
           - distro: Debian
             version: 12
+            build_type: ${{ needs.configuration.outputs.build_type }}
             package: DEB
 
           - distro: Fedora
             version: 41
+            build_type: ${{ needs.configuration.outputs.build_type }}
             package: RPM
 
           - distro: Fedora
             version: 42
+            build_type: ${{ needs.configuration.outputs.build_type }}
             package: RPM
 
           - distro: Ubuntu
             version: 22.04
+            build_type: ${{ needs.configuration.outputs.build_type }}
             package: DEB
 
           - distro: Ubuntu
             version: 24.04
+            build_type: ${{ needs.configuration.outputs.build_type }}
             package: DEB
 
-        # exclude:
-        #   - distro: Arch    # Exclude release build for Arch as we are packaged in the community repo already
-        #     build_type: Release
+        exclude:
+          - distro: Arch    # Exclude release build for Arch as we are packaged in the community repo already
+            build_type: Release
 
     name: ${{matrix.distro}} ${{matrix.version}} ${{matrix.build_type}}
     needs: configuration
