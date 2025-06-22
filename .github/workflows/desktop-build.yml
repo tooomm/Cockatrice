@@ -114,39 +114,45 @@ jobs:
       matrix:
         # Dynamically expand build matrix according to needed Release/Debug build types
         # build_type: ${{ fromJson(needs.configuration.outputs.build_types) }}
-        build_type: [Debug]
         # The below builds correspond to the files in ".ci/$distro$version"
         include:
           - distro: Arch
             allow-failure: yes
+            build_type: ${{ fromJson(needs.configuration.outputs.build_types) }}
 
           - distro: Debian
             version: 11
             package: DEB
+            build_type: ${{ fromJson(needs.configuration.outputs.build_types) }}
 
           - distro: Debian
             version: 12
             package: DEB
+            build_type: ${{ fromJson(needs.configuration.outputs.build_types) }}
 
           - distro: Fedora
             version: 41
             package: RPM
+            build_type: ${{ fromJson(needs.configuration.outputs.build_types) }}
 
           - distro: Fedora
             version: 42
             package: RPM
+            build_type: ${{ fromJson(needs.configuration.outputs.build_types) }}
 
           - distro: Ubuntu
             version: 22.04
             package: DEB
+            build_type: ${{ fromJson(needs.configuration.outputs.build_types) }}
 
           - distro: Ubuntu
             version: 24.04
             package: DEB
+            build_type: ${{ fromJson(needs.configuration.outputs.build_types) }}
 
-        # exclude:
-        #   - distro: Arch    # Exclude release build for Arch as we are packaged in the community repo already
-        #     build_type: Release
+        exclude:
+          - distro: Arch    # Exclude release build for Arch as we are packaged in the community repo already
+            build_type: Release
 
     name: ${{matrix.distro}} ${{matrix.version}} ${{matrix.build_type}}
     needs: configuration
