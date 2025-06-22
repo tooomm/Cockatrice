@@ -58,7 +58,7 @@ jobs:
         id: set_build_types
         shell: bash
         run: |
-          build_type='[\"Debug\"]'
+          build_types='[\"Debug\"]'
           if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == "refs/heads/master" ]]; then
             build_types='[\"Debug\", \"Release\"]'
           elif [[ "${{ github.ref }}" =~ ^refs/tags/ ]]; then
