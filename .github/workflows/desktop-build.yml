@@ -189,10 +189,10 @@ jobs:
           # Release + Package
           if [[ "${{matrix.build_type}}" == "Release" ]]; then
             RUN --server --release --package "${{matrix.package}}" --dir "$BUILD_DIR" --ccache "$CCACHE_SIZE"
-            .ci/name_build.sh
           # Debug + Test
           else
             RUN --server --debug --test --dir "$BUILD_DIR" --ccache "$CCACHE_SIZE"
+          .ci/name_build.sh
           fi
 
       - name: Save compiler cache (ccache)
