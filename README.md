@@ -33,10 +33,10 @@ First work on a webclient with <kbd>Typescript</kbd> was started as well.<br>
 Downloads are available for **stable releases** and the current **beta version** in development.  
 There is no strict release schedule for either of them.
 <br><pre>
-Latest <kbd>stable</kbd> release:
+Latest <b>STABLE</b> release:
 [![Download Stable Release](https://img.shields.io/github/release/cockatrice/cockatrice.svg?label=version&colorB=0d7ebf "Download Latest Stable Release")](https://github.com/cockatrice/cockatrice/releases/latest) ![](https://img.shields.io/github/release-date/Cockatrice/Cockatrice.svg?label=released&colorB=0d7ebf "Release Date") [![](https://img.shields.io/github/downloads/cockatrice/cockatrice/latest/total.svg?label=downloads&colorB=0d7ebf "Number of Downloads")](https://tooomm.github.io/github-release-stats/?username=Cockatrice&repository=Cockatrice&search=0)
 </pre><pre>
-Latest <kbd>beta</kbd> version:
+Latest <b>BETA</b> version:
 [![Download Beta Release](https://img.shields.io/github/release/cockatrice/cockatrice/all.svg?label=version&colorB=f37f40 "Download Latest Beta Release")](https://github.com/cockatrice/cockatrice/releases) ![](https://img.shields.io/github/release-date-pre/Cockatrice/Cockatrice.svg?label=released&colorB=f37f40 "Release Date") [![](https://img.shields.io/github/downloads-pre/cockatrice/cockatrice/latest/total.svg?label=downloads&colorB=f37f40 "Number of Downloads")](https://tooomm.github.io/github-release-stats/?username=Cockatrice&repository=Cockatrice&search=0) [![](https://img.shields.io/github/commits-since/Cockatrice/Cockatrice/latest.svg?label=changes&colorB=f37f40 "Changes over Stable Release")](https://github.com/Cockatrice/Cockatrice/pulls?q=is%3Apr+is%3Aclosed)
 <sub><i>While incorporating the latest fixes and features, beta builds may not be stable or contain new bugs!</i></sub>
 <sub><b><i>Please report any findings and open new issues when testing them!</i></b></sub>
