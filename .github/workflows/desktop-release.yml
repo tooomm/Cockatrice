@@ -1,0 +1,78 @@
+name: Release Desktop
+
+permissions:
+  
+
+concurrency:
+  group: "${{ github.workflow }} @ ${{ github.ref_name }}"
+  cancel-in-progress: false
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_name:
+        # make required for stable releases?
+        description: Release name (optional, e.g. XXXX)
+        required: false
+        type: string
+      version_tag:
+        description: Git tag with version (e.g. XXXXX)
+        required: true
+        type: string
+      commit_sha:
+        description: Commit SHA (optional, defaults to master)
+        required: false
+        type: string
+        default: ''
+      prerelease:
+        description: Beta release (GitHub Pre-release)?
+        # required even useful if default is set?
+        required: true
+        type: boolean
+        default: true
+      draft:
+        description: XX
+        required: true
+        type: boolean
+        default: true
+      # needed if trigger is to run on non-betas?
+      cleanup_old_betas:
+        description: XXXX
+        required: true
+        type: boolean
+        default: true
+
+jobs:
+  release:
+    runs-on: ubuntu-slim
+    steps:
+      # instead checkout, use the binaries build on that workflow?
+      # check if the build succeeded?
+      - name: Checkout Repo
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.commit_sha || github.sha }}
+
+      # only if not using binaries from former workflow artifacts
+      - name: Build
+
+      - name: Beta Notes
+
+      - name: Release Template
+
+      - name: Create Release
+        # or: ncipollo/release-action@v1
+        uses: softprops/action-gh-release@v3
+        with:
+          release_name: ${{ inputs.release_name }}
+          tag_name: ${{ inputs.version_tag }}
+          commit_sha: ${{ inputs.commit_sha }}
+          prerelease: ${{ inputs.prerelease }}
+          draft: ${{ inputs.draft }}
+          update: 
+
+      - name: Cleanup Older Betas
+        if: ${{ inputs.prerelease == 'false' }}
+        # or: x
+        uses: x
+
