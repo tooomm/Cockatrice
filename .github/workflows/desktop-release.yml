@@ -1,3 +1,5 @@
+# Start with old beta cleanup workflow which runs for releases/tags and extend later
+
 name: Release Desktop
 
 permissions:
