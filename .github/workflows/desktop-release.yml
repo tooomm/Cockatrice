@@ -1,4 +1,5 @@
 # Start with old beta cleanup workflow which runs for releases/tags and extend later
+# Add depoyment environments for approval step before deleting tags? https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments#prerequisites
 
 name: Release Desktop
 
