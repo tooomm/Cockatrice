@@ -73,6 +73,9 @@ jobs:
 
       - name: Cleanup Older Betas
         if: ${{ inputs.prerelease == 'false' }}
-        # or: x
-        uses: x
+        # or: jay2610/delete-older-releases
+        # or: ophub/delete-releases-workflows
+        uses: hugo19941994/delete-draft-releases@v3
+        with:
+          
 
