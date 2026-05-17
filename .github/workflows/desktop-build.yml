@@ -347,19 +347,19 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Add msbuild to PATH
+      - name: [Windows] Add msbuild to PATH
         if: matrix.os == 'Windows'
         id: add-msbuild
         uses: microsoft/setup-msbuild@v3
         with:
           msbuild-architecture: x64
 
-      - name: Setup ccache
-        if: matrix.use_ccache == 1 && matrix.os == 'macOS'
+      - name: [macOS] Setup ccache
+        if: matrix.os == 'macOS' && matrix.use_ccache == 1
         run: brew install ccache
 
-      - name: Restore compiler cache (ccache)
-        if: matrix.use_ccache == 1
+      - name: [macOS] Restore compiler cache (ccache)
+        if: matrix.os == 'macOS' && matrix.use_ccache == 1
         id: ccache_restore
         uses: actions/cache/restore@v5
         env:
@@ -378,7 +378,7 @@ jobs:
         shell: bash
         run: .ci/resolve_latest_aqt_qt_version.sh "${{matrix.qt_version}}"
 
-      - name: Restore thin Qt ${{ steps.resolve_qt_version.outputs.version }} libraries (${{ matrix.soc }} macOS)
+      - name: [macOS] Restore thin Qt ${{ steps.resolve_qt_version.outputs.version }} libraries (${{ matrix.soc }} macOS)
         if: matrix.os == 'macOS'
         id: restore_qt
         uses: actions/cache/restore@v5
@@ -388,7 +388,7 @@ jobs:
 
       # Using jurplel/install-qt-action to install Qt without using brew
       # qt build using vcpkg either just fails or takes too long to build
-      - name: Install fat Qt ${{ steps.resolve_qt_version.outputs.version }} (${{ matrix.soc }} macOS)
+      - name: [macOS] Install fat Qt ${{ steps.resolve_qt_version.outputs.version }} (${{ matrix.soc }} macOS)
         if: matrix.os == 'macOS' && steps.restore_qt.outputs.cache-hit != 'true'
         uses: jurplel/install-qt-action@v4
         with:
@@ -398,18 +398,18 @@ jobs:
           cache: false
           dir: ${{github.workspace}}
 
-      - name: Thin Qt libraries (${{ matrix.soc }} macOS)
+      - name: [macOS] Thin Qt libraries (${{ matrix.soc }} macOS)
         if: matrix.os == 'macOS' && steps.restore_qt.outputs.cache-hit != 'true'
         run: .ci/thin_macos_qtlib.sh
 
-      - name: Cache thin Qt libraries (${{ matrix.soc }} macOS)
+      - name: [macOS] Cache thin Qt libraries (${{ matrix.soc }} macOS)
         if: matrix.os == 'macOS' && steps.restore_qt.outputs.cache-hit != 'true'
         uses: actions/cache/save@v5
         with:
           path: ${{ github.workspace }}/Qt
           key: thin-qt-macos-${{ matrix.soc }}-${{ steps.resolve_qt_version.outputs.version }}
 
-      - name: Install Qt ${{matrix.qt_version}} (Windows)
+      - name: [Windows] Install Qt ${{matrix.qt_version}}
         if: matrix.os == 'Windows'
         uses: jurplel/install-qt-action@v4
         with:
@@ -420,7 +420,7 @@ jobs:
           modules: ${{matrix.qt_modules}}
           cache: true
 
-      - name: Install NSIS
+      - name: [Windows] Install NSIS
         if: matrix.os == 'Windows'
         shell: bash
         run: choco install nsis
@@ -455,8 +455,8 @@ jobs:
         run: .ci/compile.sh --server --test --vcpkg
 
       # Delete used cache to emulate a ccache update. See https://github.com/actions/cache/issues/342
-      - name: Delete remote compiler cache (ccache)
-        if: github.ref == 'refs/heads/master' && matrix.use_ccache == 1 && steps.ccache_restore.outputs.cache-hit
+      - name: [macOS] Delete remote compiler cache (ccache)
+        if: matrix.os == 'macOS' && github.ref == 'refs/heads/master' && matrix.use_ccache == 1 && steps.ccache_restore.outputs.cache-hit
         continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
@@ -465,14 +465,14 @@ jobs:
             echo "Cache deleted successfully"
           fi
 
-      - name: Save updated compiler cache (ccache)
-        if: github.ref == 'refs/heads/master' && matrix.use_ccache == 1
+      - name: [macOS] Save updated compiler cache (ccache)
+        if: matrix.os == 'macOS' && github.ref == 'refs/heads/master' && matrix.use_ccache == 1
         uses: actions/cache/save@v5
         with:
           path: ${{env.CCACHE_DIR}}
           key: ${{ steps.ccache_restore.outputs.cache-primary-key }}
 
-      - name: Sign app bundle
+      - name: [macOS] Sign app bundle
         if: matrix.os == 'macOS' && matrix.make_package && needs.configure.outputs.tag != null
         id: sign_macos
         env:
@@ -485,8 +485,8 @@ jobs:
             /usr/bin/codesign --sign="$MACOS_CERTIFICATE_NAME" --entitlements=".ci/macos.entitlements" --options=runtime --force --deep --timestamp --verbose "${{steps.build.outputs.path}}"
           fi
 
-      - name: Notarize app bundle
-        if: steps.sign_macos.outcome == 'success'
+      - name: [macOS] Notarize app bundle
+        if: matrix.os == 'macOS' && steps.sign_macos.outcome == 'success'
         env:
           MACOS_NOTARIZATION_APPLE_ID: ${{ secrets.PROD_MACOS_NOTARIZATION_APPLE_ID }}
           MACOS_NOTARIZATION_TEAM_ID: ${{ secrets.PROD_MACOS_NOTARIZATION_TEAM_ID }}
@@ -526,7 +526,7 @@ jobs:
           archive: false
           if-no-files-found: error
 
-      - name: Upload PDBs (Program Databases)
+      - name: [Windows] Upload PDBs (Program Databases)
         if: matrix.os == 'Windows' && github.ref_type != 'tag'
         uses: actions/upload-artifact@v7
         with:
