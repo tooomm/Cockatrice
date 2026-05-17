@@ -19,9 +19,6 @@ on:
       - '.github/workflows/desktop-build.yml'
       - 'CMakeLists.txt'
       - 'vcpkg.json'
-      - 'vcpkg'
-    tags:
-      - '*'
   pull_request:
     paths:
       - '*/**'    # matches all files not in root
@@ -32,7 +29,10 @@ on:
       - '.github/workflows/desktop-build.yml'
       - 'CMakeLists.txt'
       - 'vcpkg.json'
-      - 'vcpkg'
+  release:
+    types:
+      - published    # publishing of pre-releases or stable releases
+      # check if this actually works or conflicts with release process, automations, release scripts and drafts
 
 # Cancel earlier, unfinished runs of this workflow on the same branch (unless on release)
 concurrency:
@@ -54,7 +54,7 @@ jobs:
         run: |
           tag_regex='^refs/tags/'
           if [[ $GITHUB_EVENT_NAME == pull_request ]]; then    # pull request
-            sha="${{ github.event.pull_request.head.sha }}"
+            sha="${{ github.event.pull_request.head.sha }}"    # wrong ref? merge commit, not the same which is listed in cmake or in the installer/client logs?
           elif [[ $GITHUB_REF =~ $tag_regex ]]; then    # release
             sha="$GITHUB_SHA"
             tag="${GITHUB_REF/refs\/tags\//}"
@@ -185,7 +185,7 @@ jobs:
         if: matrix.package != 'skip'
         shell: bash
         env:
-          SUFFIX: '-${ {matrix.distro }}${{ matrix.version }}'
+          SUFFIX: '-${{ matrix.distro }}${{ matrix.version }}'
           package: '${{ matrix.package }}'
           server_only: '${{ matrix.server_only }}'
         run: |
