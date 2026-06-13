@@ -418,7 +418,7 @@ jobs:
           arch: ${{ matrix.qt_arch }}
           cache: true
           modules: ${{ matrix.qt_modules }}
-          version: ${{ steps.resolve_qt_version.outputs.version }}
+          version: ${{ matrix.qt_version }}
 
       - name: "[Windows] Install NSIS"
         if: matrix.os == 'Windows'
