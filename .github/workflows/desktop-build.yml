@@ -376,7 +376,7 @@ jobs:
           path: ${{ env.CCACHE_DIR }}
           restore-keys: ccache-${{ matrix.runner }}-${{ matrix.soc }}-${{ matrix.type }}-
 
-      - name: "Install aqtinstall"
+      - name: "Install aqtinstall "
         run: pipx install aqtinstall
 
       # Resolve given wildcard versions (e.g. Qt 6.6.*) to latest version via aqtinstall to avoid stale caches on new releases
