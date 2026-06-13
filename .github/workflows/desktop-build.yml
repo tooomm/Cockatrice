@@ -376,14 +376,7 @@ jobs:
           path: ${{ env.CCACHE_DIR }}
           restore-keys: ccache-${{ matrix.runner }}-${{ matrix.soc }}-${{ matrix.type }}-
 
-      - name: "Install aqtinstall "
-        run: pipx install aqtinstall
 
-      # Resolve given wildcard versions (e.g. Qt 6.6.*) to latest version via aqtinstall to avoid stale caches on new releases
-      - name: "Resolve latest Qt patch version"
-        id: resolve_qt_version
-        shell: bash
-        run: .ci/resolve_latest_aqt_qt_version.sh "${{ matrix.qt_version }}"
 
       - name: "[macOS] Restore thin Qt ${{ steps.resolve_qt_version.outputs.version }} libraries"
         if: matrix.os == 'macOS'
