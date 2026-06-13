@@ -335,7 +335,7 @@ jobs:
             cmake_generator_platform: x64
             make_package: 1
             package_suffix: "-Win10"
-            qt_version: 6
+            qt_version: 6.12.*
             qt_arch: win64_msvc2022_64
             qt_modules: qtimageformats qtmultimedia qtwebsockets
             type: Release
