@@ -335,7 +335,7 @@ jobs:
             cmake_generator_platform: x64
             make_package: 1
             package_suffix: "-Win10"
-            qt_version: 6.8.*
+            qt_version: 6.*.*
             qt_arch: win64_msvc2022_64
             qt_modules: qtimageformats qtmultimedia qtwebsockets
             type: Release
@@ -428,11 +428,6 @@ jobs:
 
       - name: "[Windows] Install Qt ${{ matrix.qt_version }}"
         if: matrix.os == 'Windows'
-        # uses: jurplel/install-qt-action@4
-        # uses: jurplel/install-qt-action@refs/pull/335/merge
-        # uses: pzhlkj6612/install-qt-action@fix/simpleSpec-ver-handling
-        # uses: jurplel/install-qt-action@7fddda425a96d23b453130d6171bd18f1ec7c082
-        # uses: ./action-src
         uses: ./
         with:
           # Qt 6.11.0 only works with aqtinstall directly from git until aqtinstall 3.4 is released
