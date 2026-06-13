@@ -407,11 +407,18 @@ jobs:
           key: thin-qt-macos-${{ matrix.soc }}-${{ matrix.qt_version }}
           path: ${{ github.workspace }}/Qt
 
+      - name: Checkout action PR
+        uses: actions/checkout@v4
+        with:
+          repository: jurplel/install-qt-action
+          ref: refs/pull/335/head
+          path: action-src
+
       - name: "[Windows] Install Qt ${{ matrix.qt_version }}"
         if: matrix.os == 'Windows'
         # uses: jurplel/install-qt-action@4
         # uses: jurplel/install-qt-action@refs/pull/335/merge
-        #uses: pzhlkj6612/install-qt-action@fix/simpleSpec-ver-handling
+        # uses: pzhlkj6612/install-qt-action@fix/simpleSpec-ver-handling
         uses: jurplel/install-qt-action@7fddda425a96d23b453130d6171bd18f1ec7c082
         with:
           # Qt 6.11.0 only works with aqtinstall directly from git until aqtinstall 3.4 is released
