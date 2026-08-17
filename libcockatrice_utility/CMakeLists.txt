@@ -29,11 +29,7 @@ add_library(libcockatrice_utility STATIC ${UTILITY_SOURCES} ${UTILITY_HEADERS})
 # Find peglib
 find_path(CPP_PEGLIB_INCLUDE_DIRS "peglib.h" REQUIRED)
 
-target_include_directories(libcockatrice_utility
-    PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}
-        ${CPP_PEGLIB_INCLUDE_DIRS}
-)
+target_include_directories(libcockatrice_utility PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CPP_PEGLIB_INCLUDE_DIRS})
 
 target_link_libraries(libcockatrice_utility PUBLIC libcockatrice_rng ${QT_CORE_MODULE})
 
