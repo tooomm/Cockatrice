@@ -13,5 +13,5 @@
     - master (2016-04-22)
 
 **Servatrice**
-- SMTP
+- [SMTP](https://github.com/mnutt/libqxt)
     - ?
