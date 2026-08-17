@@ -252,6 +252,10 @@ if(MSVC)
   find_package(VCredistRuntime)
 endif()
 
+# Find peglib
+find_path(CPP_PEGLIB_INCLUDE_DIRS "peglib.h")
+target_include_directories(main PRIVATE ${CPP_PEGLIB_INCLUDE_DIRS})
+
 # Package builder
 set(CPACK_PACKAGE_CONTACT "Zach Halpern <zach@cockatrice.us>")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${PROJECT_NAME}")
