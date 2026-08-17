@@ -18,12 +18,7 @@ libcockatrice_* \
 "oracle/src" \
 "servatrice/src" \
 "tests")
-exclude=("libcockatrice_rng/libcockatrice/rng/sfmt/" \
-"libcockatrice_utility/libcockatrice/utility/peglib.h" \
-"oracle/src/lzma/" \
-"oracle/src/qt-json/" \
-"oracle/src/zip/" \
-"servatrice/src/smtp/")
+exclude=("third_party/")
 exts=("cpp" "h" "proto")
 cf_cmd="clang-format"
 branch="origin/master"
