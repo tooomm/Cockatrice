@@ -254,7 +254,7 @@ endif()
 
 # Find peglib
 find_path(CPP_PEGLIB_INCLUDE_DIRS "peglib.h")
-target_include_directories(main PRIVATE ${CPP_PEGLIB_INCLUDE_DIRS})
+target_include_directories(Cockatrice PRIVATE ${CPP_PEGLIB_INCLUDE_DIRS})
 
 # Package builder
 set(CPACK_PACKAGE_CONTACT "Zach Halpern <zach@cockatrice.us>")
