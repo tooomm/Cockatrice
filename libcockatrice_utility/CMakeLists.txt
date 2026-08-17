@@ -32,7 +32,6 @@ find_path(CPP_PEGLIB_INCLUDE_DIRS "peglib.h" REQUIRED)
 target_include_directories(libcockatrice_utility
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}
-    PRIVATE
         ${CPP_PEGLIB_INCLUDE_DIRS}
 )
 
