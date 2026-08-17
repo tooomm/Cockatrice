@@ -5,13 +5,13 @@
     - [v1.16.0](https://github.com/yhirose/cpp-peglib/releases/tag/v1.16.0) (2026-08-10)
 
 **Oracle**
-- lzma
+- [lzma](https://git.tukaani.org/?p=xz.git;a=summary)
     - x
-- qt-json
-    - x
-- zip
-    - x
+- [qt-json](https://github.com/qt-json/qt-json) `unmaintained`
+    - master (2018-02-12)
+- [Zip](https://github.com/hippydream/osdab/tree/master/OSDaB-Zip) `unmaintained`
+    - master (2016-04-22)
 
 **Servatrice**
 - SMTP
-    - x
+    - ?
