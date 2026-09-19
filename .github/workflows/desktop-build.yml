@@ -379,24 +379,29 @@ jobs:
         shell: bash
         run: .ci/resolve_latest_aqt_qt_version.sh "$QT_VERSION"
 
-      - name: "[macOS] Restore thin Qt ${{ steps.resolve_qt_version.outputs.version }} libraries"
-        if: matrix.os == 'macOS'
-        id: restore_qt
-        uses: actions/cache/restore@v6
-        with:
-          key: Qt-${{ steps.resolve_qt_version.outputs.version }}-macOS-${{ matrix.soc }}-${{ matrix.qt_modules }}-thin
-          path: ${{ github.workspace }}/Qt
+     # - name: "[macOS] Restore thin Qt ${{ steps.resolve_qt_version.outputs.version }} libraries"
+     #   if: matrix.os == 'macOS'
+     #   id: restore_qt
+     #   uses: actions/cache/restore@v6
+     #   with:
+     #     key: Qt-${{ steps.resolve_qt_version.outputs.version }}-macOS-${{ matrix.soc }}-${{ matrix.qt_modules }}-thin
+     #     path: ${{ github.workspace }}/Qt
 
       # Using jurplel/install-qt-action to install Qt without using brew
       # Qt build using vcpkg either just fails or takes too long to build
       - name: "[macOS] Install fat Qt ${{ steps.resolve_qt_version.outputs.version }}"
         if: matrix.os == 'macOS' && steps.restore_qt.outputs.cache-hit != 'true'
+        id: qt_install
         uses: jurplel/install-qt-action@v4
         with:
           cache: false
           dir: ${{ github.workspace }}
           modules: ${{ matrix.qt_modules }}
           version: ${{ steps.resolve_qt_version.outputs.version }}
+
+      - name: "[macOS] Create thin Qt libraries"
+        if: matrix.os == 'macOS' && steps.restore_qt.outputs.cache-hit != 'true'
+        run: echo "${{ steps.qt_install.outputs.qtPath }}"
 
       - name: "[macOS] Create thin Qt libraries"
         if: matrix.os == 'macOS' && steps.restore_qt.outputs.cache-hit != 'true'
